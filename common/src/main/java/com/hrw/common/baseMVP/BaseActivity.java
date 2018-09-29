@@ -13,7 +13,7 @@ import com.hrw.common.butterknife.ButterKnife;
  * @desc:
  */
 public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity {
-    P mPresenter;
+    protected P mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,7 +22,10 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
 
         mPresenter = createPresenter();
         setContentView(createLayout());
+        initView();
     }
+
+    protected abstract void initView();
 
     protected abstract int createLayout();
 

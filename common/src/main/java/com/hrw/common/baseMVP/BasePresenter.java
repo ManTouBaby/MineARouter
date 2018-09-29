@@ -1,6 +1,8 @@
 package com.hrw.common.baseMVP;
 
 
+import android.support.annotation.NonNull;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -31,7 +33,7 @@ public class BasePresenter<V> {
         onUnsubscribe();
     }
 
-    public <K>void onSubscribe(Observable<K> observable, Consumer<K> consumer) {
+    public <K> void onSubscribe(@NonNull Observable observable, @NonNull Consumer<K> consumer) {
         if (mDisposable == null) {
             mDisposable = new CompositeDisposable();
         }

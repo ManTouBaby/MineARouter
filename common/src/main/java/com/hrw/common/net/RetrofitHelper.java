@@ -1,7 +1,7 @@
 package com.hrw.common.net;
 
 import com.google.gson.GsonBuilder;
-import com.hrw.common.utils.L;
+import com.hrw.common.utils.LogUtils;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -46,10 +46,10 @@ public class RetrofitHelper {
             long duration = endTime - startTime;
             okhttp3.MediaType mediaType = response.body().contentType();
             String content = response.body().string();
-            L.d("----------Request Start----------------");
-            L.d("| " + request.toString());
-            L.d("| Response:" + content);
-            L.d("----------Request End:" + duration + "毫秒----------");
+            LogUtils.d("----------Request Start----------------");
+            LogUtils.d("| " + request.toString());
+            LogUtils.d("| Response:" + content);
+            LogUtils.d("----------Request End:" + duration + "毫秒----------");
             return response.newBuilder()
                     .body(okhttp3.ResponseBody.create(mediaType, content))
                     .build();

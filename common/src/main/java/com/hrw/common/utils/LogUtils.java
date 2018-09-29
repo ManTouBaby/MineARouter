@@ -8,7 +8,7 @@ import android.util.Log;
  * @date:2018/09/29 17:03
  * @desc:
  */
-public class L {
+public class LogUtils {
     public static void d(String msg) {
         Log.d("", "");
     }

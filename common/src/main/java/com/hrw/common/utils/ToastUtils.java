@@ -9,7 +9,7 @@ import android.widget.Toast;
  * @date:2018/09/29 17:04
  * @desc:
  */
-public class T {
+public class ToastUtils {
     private static Context mContent;
 
     private static void instance(Context context) {
