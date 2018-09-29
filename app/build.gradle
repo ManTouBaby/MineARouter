@@ -1,0 +1,38 @@
+if (isModule.toBoolean()) {
+    apply plugin: 'com.android.library'
+} else {
+    apply plugin: 'com.android.application'
+}
+
+android {
+    compileSdkVersion rootProject.ext.androidConfig.compileSdkVersion
+    defaultConfig {
+//        applicationId "com.hrw.arouter"
+        minSdkVersion rootProject.ext.androidConfig.minSdkVersion
+        targetSdkVersion rootProject.ext.androidConfig.targetSdkVersion
+        versionCode rootProject.ext.androidConfig.versionCode
+        versionName rootProject.ext.androidConfig.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':common')
+    if (!isModule.toBoolean()) {
+        implementation project(':main')
+        implementation project(':music')
+        implementation project(':news')
+    }
+}
