@@ -33,7 +33,7 @@ public class BasePresenter<V> {
         onUnsubscribe();
     }
 
-    public <K> void onSubscribe(@NonNull Observable observable, @NonNull Consumer<K> consumer) {
+    public <K> void onSubscribe(@NonNull Observable<K> observable, @NonNull Consumer<K> consumer) {
         if (mDisposable == null) {
             mDisposable = new CompositeDisposable();
         }
