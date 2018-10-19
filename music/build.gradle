@@ -7,6 +7,10 @@ if (isModule.toBoolean()) {
 android {
     compileSdkVersion rootProject.ext.androidConfig.compileSdkVersion
 
+//    dataBinding {
+//        enabled = true
+//    }
+
     defaultConfig {
         minSdkVersion rootProject.ext.androidConfig.minSdkVersion
         targetSdkVersion rootProject.ext.androidConfig.targetSdkVersion

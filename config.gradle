@@ -8,7 +8,7 @@ ext {
     ]
 
     libsVersion = [
-            supportLibraryVersion = "26.1.0",
+            supportLibraryVersion = "27.1.0",
             constraint_layout = "1.1.0",
             retrofit = "2.3.0",
             retrofit_converter_gson = "2.3.0",

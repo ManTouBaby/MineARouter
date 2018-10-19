@@ -1,6 +1,6 @@
 package com.hrw.common.net;
 
-import com.hrw.common.utils.ToastUtils;
+import com.hrw.common.utils.MtToast;
 
 import io.reactivex.functions.Consumer;
 
@@ -18,7 +18,7 @@ public abstract class MineConsumer<K> implements Consumer<ResultBean<K>> {
             acceptSuccess(tResultBean.getData());
         } else {
             acceptFail(tResultBean.getMsg());
-            ToastUtils.toastLongMSG(tResultBean.getMsg());
+            MtToast.toastLongMSG(tResultBean.getMsg());
         }
     }
 
