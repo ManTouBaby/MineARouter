@@ -10,10 +10,10 @@ import io.reactivex.functions.Consumer;
  * @date:2018/09/29 17:54
  * @desc:
  */
-public abstract class MineConsumer<K> implements Consumer<ResultBean<K>> {
+public abstract class MtConsumer<K> implements Consumer<MtResultBean<K>> {
 
     @Override
-    public void accept(ResultBean<K> tResultBean) throws Exception {
+    public void accept(MtResultBean<K> tResultBean) throws Exception {
         if (tResultBean.isFlag() && tResultBean.getCode() == 200) {
             acceptSuccess(tResultBean.getData());
         } else {

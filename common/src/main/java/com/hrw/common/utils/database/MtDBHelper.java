@@ -68,8 +68,7 @@ public class MtDBHelper extends SQLiteOpenHelper {
         if (mMapList == null || mMapList.size() < 1) new Throwable("参数大小不能小于1");
         for (Map<String, MtDBType> dbTypeMap : mMapList) {
             String tableName = null;
-            String primaryName = null;
-            String primaryType = null;
+            String primaryKey = null;
             Set<Map.Entry<String, MtDBType>> entries = dbTypeMap.entrySet();
             for (Map.Entry<String, MtDBType> typeEntry : entries) {
                 if (typeEntry.getValue() == MtDBType.TABLE_NAME) {
@@ -77,22 +76,15 @@ public class MtDBHelper extends SQLiteOpenHelper {
                     sqlString.add(tableName);
                 }
                 if (typeEntry.getValue() == MtDBType.TABLE_TYPE_PRIMARY) {
-                    primaryName = typeEntry.getKey();
+                    primaryKey = typeEntry.getKey();
                 }
-                if (tableName != null && primaryName != null) {
-                    break;
-                }
-            }
-            for (Map.Entry<String, MtDBType> typeEntry : entries) {
-                if (typeEntry.getKey().equals(primaryName)) {
-                    tableName = typeEntry.getKey();
+                if (tableName != null && primaryKey != null) {
                     break;
                 }
             }
 
-            primaryType = primaryType == null ? "integer" : primaryType;
             StringBuffer stringBuffer = new StringBuffer();
-            stringBuffer.append("CREATE TABLE " + tableName + " (" + primaryName + " " + primaryType + " primary key autoincrement,");
+            stringBuffer.append("CREATE TABLE " + tableName + " (" + primaryKey + " " + MtDBType.TABLE_TYPE_TEXT.getValue() + " primary key autoincrement,");
 
             Iterator<Map.Entry<String, MtDBType>> entryIterable = entries.iterator();
             while (entryIterable.hasNext()) {
@@ -101,18 +93,12 @@ public class MtDBHelper extends SQLiteOpenHelper {
                     continue;
                 }
                 if (entryIterable.hasNext()) {
-                    stringBuffer.append(typeEntry.getKey() + " " + typeEntry.getValue() + ",");
+                    stringBuffer.append(typeEntry.getKey() + " " + typeEntry.getValue().getValue() + ",");
                 } else {
-                    stringBuffer.append(typeEntry.getKey() + " " + typeEntry.getValue());
+                    stringBuffer.append(typeEntry.getKey() + " " + typeEntry.getValue().getValue());
                 }
 
             }
-//            for (Map.Entry<String, MtDBType> typeEntry : entries) {
-//                if (typeEntry.getValue() == MtDBType.TABLE_NAME || typeEntry.getValue() == MtDBType.TABLE_TYPE_PRIMARY) {
-//                    continue;
-//                }
-//                stringBuffer.append(typeEntry.getKey() + " " + typeEntry.getValue() + ",");
-//            }
             stringBuffer.append(");");
             System.out.println("执行SQL:" + stringBuffer);
         }

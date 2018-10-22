@@ -1,9 +1,9 @@
 package com.hrw.login;
 
-import com.hrw.common.baseMVP.BaseActivity;
-import com.hrw.common.baseMVP.BasePresenter;
-import com.hrw.common.net.MineConsumer;
-import com.hrw.common.net.RetrofitHelper;
+import com.hrw.common.baseMVVM.BaseActivity;
+import com.hrw.common.baseMVVM.BasePresenter;
+import com.hrw.common.net.MtConsumer;
+import com.hrw.common.net.MtRetrofitHelper;
 
 import io.reactivex.Observable;
 
@@ -11,8 +11,9 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
     @Override
     protected void initView() {
-
-        mPresenter.onSubscribe((Observable) RetrofitHelper.instance().createClass(LoginApi.class).doLogin(), new MineConsumer<LoginBean>() {
+        mPresenter.onSubscribe((Observable) MtRetrofitHelper
+                .getRetrofit()
+                .createClass(LoginApi.class).doLogin(), new MtConsumer<LoginBean>() {
             @Override
             protected void acceptSuccess(LoginBean date) {
 

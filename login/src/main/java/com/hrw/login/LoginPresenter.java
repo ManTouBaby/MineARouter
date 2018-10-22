@@ -1,6 +1,6 @@
 package com.hrw.login;
 
-import com.hrw.common.baseMVP.BasePresenter;
+import com.hrw.common.baseMVVM.BasePresenter;
 
 /**
  * @version 1.0.0

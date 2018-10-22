@@ -6,7 +6,7 @@ package com.hrw.common.net;
  * @date:2018/09/29 17:47
  * @desc:
  */
-public class ResultBean<T> {
+public class MtResultBean<T> {
     private String msg;
     private int code;
     private boolean flag;

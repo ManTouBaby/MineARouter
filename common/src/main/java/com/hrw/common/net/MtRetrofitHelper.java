@@ -20,20 +20,28 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @date:2018/09/29 14:29
  * @desc:
  */
-public class RetrofitHelper {
-    private final OkHttpClient mClient;
-    private final Retrofit mRetrofit;
+public class MtRetrofitHelper {
+    private static OkHttpClient mClient;
+    private static Retrofit mRetrofit;
 
-    static RetrofitHelper retrofitHelper;
+    private static MtRetrofitHelper mRetrofitHelper;
+    private static String mBaseUrl;
 
-    public static RetrofitHelper instance() {
+    public static MtRetrofitHelper init(String baseUrl) {
+        mBaseUrl = baseUrl;
         synchronized (Object.class) {
-            if (retrofitHelper == null) {
-                retrofitHelper = new RetrofitHelper();
+            if (mRetrofitHelper == null) {
+                mRetrofitHelper = new MtRetrofitHelper();
             }
         }
-        return retrofitHelper;
+        return mRetrofitHelper;
     }
+
+    public static MtRetrofitHelper getRetrofit() {
+        if (mRetrofitHelper == null) new Throwable("必须对RetrofitHelper进行初始化");
+        return mRetrofitHelper;
+    }
+
 
     Interceptor interceptor = new Interceptor() {
         @Override
@@ -56,15 +64,16 @@ public class RetrofitHelper {
         }
     };
 
-    private RetrofitHelper() {
-        mClient = new OkHttpClient.Builder()
+    private MtRetrofitHelper() {
+
+        if (mClient == null) mClient = new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
                 .connectTimeout(20, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS)
                 .build();
 
-        mRetrofit = new Retrofit.Builder()
-                .baseUrl("")
+        if (mRetrofit == null) mRetrofit = new Retrofit.Builder()
+                .baseUrl(mBaseUrl)
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//支持RxJava
                 .client(mClient)

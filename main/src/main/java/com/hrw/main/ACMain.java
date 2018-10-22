@@ -1,7 +1,8 @@
 package com.hrw.main;
 
-import com.hrw.common.baseMVP.BaseActivity;
-import com.hrw.common.baseMVP.BasePresenter;
+import com.hrw.common.baseMVVM.BaseActivity;
+import com.hrw.common.baseMVVM.BasePresenter;
+import com.hrw.common.utils.database.MtDBManager;
 
 /**
  * @version 1.0.0
@@ -12,7 +13,7 @@ import com.hrw.common.baseMVP.BasePresenter;
 public class ACMain extends BaseActivity{
     @Override
     protected void initView() {
-
+        MtDBManager.init();
     }
 
     @Override

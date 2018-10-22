@@ -1,4 +1,4 @@
-package com.hrw.common.baseMVP;
+package com.hrw.common.baseMVVM;
 
 
 import android.support.annotation.NonNull;

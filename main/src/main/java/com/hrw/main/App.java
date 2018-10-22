@@ -20,14 +20,13 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         List<Map<String, MtDBType>> maps = new ArrayList<>();
         Map<String, MtDBType> typeMap = new HashMap<>();
         typeMap.put("text_table", MtDBType.TABLE_NAME);
         typeMap.put("id", MtDBType.TABLE_TYPE_PRIMARY);
-        typeMap.put("id", MtDBType.TABLE_TYPE_INTEGER);
         typeMap.put("student_name", MtDBType.TABLE_TYPE_TEXT);
         typeMap.put("student_grade", MtDBType.TABLE_TYPE_TEXT);
+        typeMap.put("student_sex", MtDBType.TABLE_TYPE_TEXT);
         maps.add(typeMap);
         MtDBHelper.instance(this, "text", maps, 1);
     }
