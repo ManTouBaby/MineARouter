@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="windows_bg">#ffffff</color>
+    <color name="windows_driver">#B7B7B7</color>
+    <color name="text_white">#ffffff</color>
+    <color name="text_main_red">#CF403D</color>
 </resources>
