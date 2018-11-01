@@ -10,7 +10,7 @@ import android.util.Log;
  */
 public class MtLog {
     private static String mTag;
-    private static boolean mIsOpen;
+    private static boolean mIsOpen = false;
 
     public static void init(boolean isOpen) {
 

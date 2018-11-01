@@ -11,13 +11,23 @@
 
     <ImageView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:background="#0a2e12"
         android:scaleType="fitXY"
         android:src="@mipmap/ic_login_top_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/mine_iv_login_top_logo"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="12dp"
+        android:background="#6ea"
+        android:layout_height="wrap_content"
+        android:text="1234567890" />
 
     <ImageView
+        android:id="@+id/mine_iv_login_top_logo"
         android:layout_width="108dp"
         android:layout_height="108dp"
         android:layout_marginBottom="48dp"
@@ -43,10 +53,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/icon_login_bt_bg_click"
-            android:text="手机号码登录"
             android:clickable="true"
-            android:textColor="@color/color_click_login_text"
             android:gravity="center"
+            android:text="手机号码登录"
+            android:textColor="@color/color_click_login_text"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
 
@@ -55,9 +65,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:clickable="true"
             android:background="@drawable/icon_login_bt_bg_click"
+            android:clickable="true"
+            android:gravity="center"
             android:text="注册"
             android:textColor="@color/color_click_login_text"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -69,7 +79,6 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         app:layout_constraintBottom_toTopOf="@+id/mine_other_login_container"
@@ -120,41 +129,49 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
-        <Button
+        <ImageView
             android:id="@+id/btn1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="#343434"
+            android:clickable="true"
+            android:padding="12dp"
+            android:src="@drawable/icon_login_wx_click"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/btn2" />
 
-        <Button
+        <ImageView
             android:id="@+id/btn2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:background="#be5454"
+            android:clickable="true"
+            android:padding="12dp"
+            android:src="@drawable/icon_login_qq_click"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintLeft_toRightOf="@+id/btn1"
             app:layout_constraintRight_toLeftOf="@+id/btn3" />
 
-        <Button
+        <ImageView
             android:id="@+id/btn3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="#343434"
+            android:clickable="true"
+            android:padding="12dp"
+            android:src="@drawable/icon_login_wb_click"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintLeft_toRightOf="@+id/btn2"
             app:layout_constraintRight_toRightOf="@+id/btn4" />
 
-        <Button
+        <ImageView
             android:id="@+id/btn4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="8dp"
-            android:background="#be5454"
+            android:clickable="true"
+            android:padding="12dp"
+            android:src="@drawable/icon_login_wy_click"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintLeft_toRightOf="@+id/btn3"
             app:layout_constraintRight_toRightOf="parent" />
