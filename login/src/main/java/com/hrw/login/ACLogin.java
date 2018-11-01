@@ -16,7 +16,7 @@ public class ACLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aclogin);
         MtStatusBarHelper.instance(this)
-                .setBGColor(Color.RED)
-                .setFullScreen(false);
+                .setBGColor(Color.TRANSPARENT)
+                .setFullScreen(true);
     }
 }
