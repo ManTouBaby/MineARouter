@@ -3,7 +3,6 @@ package com.hrw.common.butterknife;
 import android.app.Activity;
 import android.view.View;
 
-import com.hrw.mvplibrary.butterknife.BindView;
 
 import java.lang.reflect.Field;
 
@@ -23,9 +22,9 @@ public class ButterKnife {
             Field[] var3 = fields;
             int var4 = fields.length;
 
-            for(int var5 = 0; var5 < var4; ++var5) {
+            for (int var5 = 0; var5 < var4; ++var5) {
                 Field field = var3[var5];
-                BindView bindView = (BindView)field.getAnnotation(BindView.class);
+                BindView bindView = (BindView) field.getAnnotation(BindView.class);
                 if (bindView != null) {
                     int viewId = bindView.value();
 
@@ -47,15 +46,15 @@ public class ButterKnife {
             Field[] var2 = fields;
             int var3 = fields.length;
 
-            for(int var4 = 0; var4 < var3; ++var4) {
+            for (int var4 = 0; var4 < var3; ++var4) {
                 Field field = var2[var4];
-                BindView bindView = (BindView)field.getAnnotation(BindView.class);
+                BindView bindView = field.getAnnotation(BindView.class);
                 if (bindView != null) {
                     int viewId = bindView.value();
 
                     try {
                         field.setAccessible(true);
-                        field.set(currentClass, ((Activity)currentClass).findViewById(viewId));
+                        field.set(currentClass, ((Activity) currentClass).findViewById(viewId));
                     } catch (Exception var9) {
                         var9.printStackTrace();
                     }

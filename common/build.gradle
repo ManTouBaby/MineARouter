@@ -48,5 +48,7 @@ dependencies {
     api rootProject.ext.dependencies.SmartRefreshLayout
     api rootProject.ext.dependencies.banner
     api rootProject.ext.dependencies.arouter_api
-    api rootProject.ext.dependencies.MineMvp
+//    api rootProject.ext.dependencies.lifecycle_runtime
+//    api rootProject.ext.dependencies.lifecycle_extensions
+//    api rootProject.ext.dependencies.lifecycle_compiler
 }

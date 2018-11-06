@@ -20,12 +20,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:layout_width="12dp"
-        android:background="#6ea"
-        android:layout_height="wrap_content"
-        android:text="1234567890" />
-
     <ImageView
         android:id="@+id/mine_iv_login_top_logo"
         android:layout_width="108dp"

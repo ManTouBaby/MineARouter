@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryDark">#CF403D</color>
     <color name="colorAccent">#FF4081</color>
 
     <color name="windows_bg">#ffffff</color>
-    <color name="windows_driver">#B7B7B7</color>
+    <color name="windows_driver">#d3d3d3</color>
     <color name="text_white">#ffffff</color>
     <color name="text_main_red">#CF403D</color>
     <color name="text_second_red">#EC8E88</color>
@@ -14,5 +14,4 @@
     <color name="text_gray_three">#4D4D4D</color>
     <color name="text_gray_four">#848484</color>
     <color name="bg_main_red">#CF403D</color>
-
 </resources>

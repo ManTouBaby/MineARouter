@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/windows_bg"
+    tools:context=".ACBKHome">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/mine_toolBar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/include_toolbar" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="米读书城"
+            android:textColor="@color/text_white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:src="@mipmap/ic_search"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mine_toolBar_container">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp_banner"
+                android:layout_width="match_parent"
+                android:layout_height="128dp"
+                android:background="#476347" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/mine_cl_menu_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/vp_banner">
+
+                <LinearLayout
+                    android:id="@+id/ll_book_home_rank"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:drawableTop="@drawable/ic_launcher_background"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/ll_book_home_find">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:padding="2dp"
+                        android:src="@mipmap/ic_book_rank" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="排行"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_book_home_find"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/ic_launcher_background"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@+id/ll_book_home_rank"
+                    app:layout_constraintRight_toLeftOf="@+id/ll_book_home_type"
+                    app:layout_constraintTop_toTopOf="@+id/ll_book_home_rank">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@mipmap/ic_book_find" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="发现"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_book_home_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/ic_launcher_background"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@+id/ll_book_home_find"
+                    app:layout_constraintRight_toLeftOf="@+id/ll_book_home_good"
+                    app:layout_constraintTop_toTopOf="@+id/ll_book_home_rank">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@mipmap/ic_book_type" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="分类"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_book_home_good"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/ic_launcher_background"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@+id/ll_book_home_type"
+                    app:layout_constraintRight_toLeftOf="@+id/ll_book_home_complete"
+                    app:layout_constraintTop_toTopOf="@+id/ll_book_home_rank">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@mipmap/ic_book_good" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="精选"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_book_home_complete"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/ic_launcher_background"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@+id/ll_book_home_good"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ll_book_home_rank">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@mipmap/ic_book_complete" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="完结"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/mine_cl_book_type_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/mine_cl_menu_container">
+
+                <View
+                    android:id="@+id/mine_v_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="@color/windows_driver" />
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/mine_cl_most_focus"
+                    android:layout_width="0dp"
+                    android:layout_height="126dp"
+                    app:layout_constraintHorizontal_weight="2"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/mine_cl_most_focus_other"
+                    app:layout_constraintTop_toBottomOf="@+id/mine_v_1">
+
+                </android.support.constraint.ConstraintLayout>
+
+                <View
+                    android:id="@+id/mine_v_2"
+                    android:layout_width="0.5dp"
+                    android:layout_height="0dp"
+                    android:background="@color/windows_driver"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/mine_cl_most_focus"
+                    app:layout_constraintRight_toLeftOf="@+id/mine_cl_most_focus_other"
+                    app:layout_constraintTop_toBottomOf="@+id/mine_v_1" />
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/mine_cl_most_focus_other"
+                    android:layout_width="0dp"
+                    android:layout_height="126dp"
+                    app:layout_constraintHorizontal_weight="3"
+                    app:layout_constraintLeft_toRightOf="@+id/mine_cl_most_focus"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/mine_cl_most_focus">
+
+                </android.support.constraint.ConstraintLayout>
+
+                <View
+                    android:id="@+id/mine_v_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="@color/windows_driver"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mine_cl_most_focus" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#543"
+                app:layout_constraintTop_toBottomOf="@+id/mine_cl_book_type_container">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.constraint.ConstraintLayout>
