@@ -12,7 +12,7 @@ import com.hrw.common.butterknife.ButterKnife;
  * @date:2018/09/29 11:31
  * @desc:
  */
-public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity {
+public abstract class BaseActivity<P extends BaseViewModel> extends AppCompatActivity {
     protected P mPresenter;
 
     @Override

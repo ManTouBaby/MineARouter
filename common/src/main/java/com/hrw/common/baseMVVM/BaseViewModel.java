@@ -1,6 +1,7 @@
 package com.hrw.common.baseMVVM;
 
 
+import android.arch.lifecycle.ViewModel;
 import android.support.annotation.NonNull;
 
 import io.reactivex.Observable;
@@ -15,12 +16,12 @@ import io.reactivex.schedulers.Schedulers;
  * @date:2018/09/29 11:33
  * @desc:
  */
-public class BasePresenter<V> {
+public class BaseViewModel<V> extends ViewModel {
     V mView;
 
     CompositeDisposable mDisposable;
 
-    public BasePresenter(V v) {
+    public BaseViewModel(V v) {
         onAttach(v);
     }
 
