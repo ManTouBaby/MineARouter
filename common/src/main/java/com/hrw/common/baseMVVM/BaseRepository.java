@@ -7,5 +7,6 @@ package com.hrw.common.baseMVVM;
  * @desc:
  */
 public class BaseRepository {
-    
+
+
 }

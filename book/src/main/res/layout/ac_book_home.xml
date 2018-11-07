@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/windows_bg"
-    tools:context=".ACBKHome">
+    tools:context=".bk.ui.ACBKHome">
 
 
     <android.support.constraint.ConstraintLayout

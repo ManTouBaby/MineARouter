@@ -31,7 +31,17 @@ public class MtRetrofitHelper {
         mBaseUrl = baseUrl;
         synchronized (Object.class) {
             if (mRetrofitHelper == null) {
-                mRetrofitHelper = new MtRetrofitHelper();
+                mRetrofitHelper = new MtRetrofitHelper(null);
+            }
+        }
+        return mRetrofitHelper;
+    }
+
+    public static MtRetrofitHelper init(Interceptor interceptor, String baseUrl) {
+        mBaseUrl = baseUrl;
+        synchronized (Object.class) {
+            if (mRetrofitHelper == null) {
+                mRetrofitHelper = new MtRetrofitHelper(interceptor);
             }
         }
         return mRetrofitHelper;
@@ -43,7 +53,7 @@ public class MtRetrofitHelper {
     }
 
 
-    Interceptor interceptor = new Interceptor() {
+    Interceptor mInterceptor = new Interceptor() {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
@@ -64,8 +74,8 @@ public class MtRetrofitHelper {
         }
     };
 
-    private MtRetrofitHelper() {
-
+    private MtRetrofitHelper(Interceptor interceptor) {
+        if (interceptor == null) interceptor = mInterceptor;
         if (mClient == null) mClient = new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
                 .connectTimeout(20, TimeUnit.SECONDS)
@@ -78,8 +88,6 @@ public class MtRetrofitHelper {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//支持RxJava
                 .client(mClient)
                 .build();
-
-
     }
 
     public <T> T createClass(Class<T> tClass) {

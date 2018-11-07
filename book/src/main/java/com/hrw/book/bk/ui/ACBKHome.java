@@ -1,4 +1,4 @@
-package com.hrw.book;
+package com.hrw.book.bk.ui;
 
 import android.Manifest;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
+
+import com.hrw.book.R;
 
 public class ACBKHome extends AppCompatActivity {
 
