@@ -13,11 +13,12 @@ public class MtLog {
     private static boolean mIsOpen = false;
 
     public static void init(boolean isOpen) {
-
+        init("MtLog", isOpen);
     }
 
     public static void init(String TAG, boolean isOpen) {
         mTag = TAG;
+        mIsOpen = isOpen;
     }
 
     public static void d(String msg) {

@@ -6,5 +6,5 @@ package com.hrw.common.servicePath;
  * @desc:
  */
 public interface BKInterface {
-    String ROOT = "https://api.midukanshu.com";
+    String ROOT = "https://quapp.1122dh.com";
 }

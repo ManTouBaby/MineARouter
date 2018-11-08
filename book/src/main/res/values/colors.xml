@@ -13,5 +13,6 @@
     <color name="text_gray_two">#373737</color>
     <color name="text_gray_three">#4D4D4D</color>
     <color name="text_gray_four">#848484</color>
+    <color name="text_gray_five">#dcdcdc</color>
     <color name="bg_main_red">#CF403D</color>
 </resources>

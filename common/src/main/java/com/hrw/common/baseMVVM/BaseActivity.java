@@ -33,9 +33,7 @@ public abstract class BaseActivity<P extends BaseViewModel> extends AppCompatAct
 
     @Override
     protected void onDestroy() {
-        if (mPresenter != null) {
-            mPresenter.onDetach();
-        }
+
         super.onDestroy();
     }
 }

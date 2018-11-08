@@ -1,6 +1,6 @@
 package com.hrw.login;
 
-import com.hrw.common.net.MtResultBean;
+import com.hrw.common.net.MtResultBean1;
 
 import io.reactivex.Observer;
 import retrofit2.http.POST;
@@ -13,5 +13,5 @@ import retrofit2.http.POST;
  */
 public interface LoginApi {
     @POST("/login")
-    Observer<MtResultBean<LoginBean>> doLogin();
+    Observer<MtResultBean1<LoginBean>> doLogin();
 }

@@ -57,7 +57,6 @@ public class MtRetrofitHelper {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
-            System.out.println("Request Url:" + request.toString());
             long startTime = System.currentTimeMillis();
             okhttp3.Response response = chain.proceed(chain.request());
             long endTime = System.currentTimeMillis();
@@ -68,6 +67,7 @@ public class MtRetrofitHelper {
             MtLog.d("| " + request.toString());
             MtLog.d("| Response:" + content);
             MtLog.d("----------Request End:" + duration + "毫秒----------");
+//            System.out.println("Request Url:" + request.toString() + "\nResult:" + content);
             return response.newBuilder()
                     .body(okhttp3.ResponseBody.create(mediaType, content))
                     .build();

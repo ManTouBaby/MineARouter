@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.hrw.common.net.MtRetrofitHelper;
 import com.hrw.common.servicePath.BKInterface;
+import com.hrw.common.utils.MtLog;
 
 /**
  * @author:MtBaby
@@ -15,5 +16,6 @@ public class BKApp extends Application {
     public void onCreate() {
         super.onCreate();
         MtRetrofitHelper.init(BKInterface.ROOT);
+        MtLog.init(true);
     }
 }
