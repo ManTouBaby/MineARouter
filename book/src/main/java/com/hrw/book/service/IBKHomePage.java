@@ -1,9 +1,9 @@
-package com.hrw.book.bk.service;
+package com.hrw.book.service;
 
-import android.database.Observable;
 
-import com.hrw.book.bk.entity.HomePageBO;
+import com.hrw.book.entity.HomeChoiceBO;
 
+import io.reactivex.Observable;
 import retrofit2.http.POST;
 
 /**
@@ -13,7 +13,5 @@ import retrofit2.http.POST;
  */
 public interface IBKHomePage {
     @POST("/resource/homepage/check")
-    Observable<HomePageBO> getHomePageData();
-
-    
+    Observable<HomeChoiceBO> getHomePageData();
 }

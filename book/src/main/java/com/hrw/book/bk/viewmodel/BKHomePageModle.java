@@ -8,4 +8,5 @@ import com.hrw.common.baseMVVM.BaseViewModel;
  * @desc:
  */
 public class BKHomePageModle extends BaseViewModel {
+        
 }
