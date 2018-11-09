@@ -7,4 +7,5 @@ package com.hrw.book.entity;
  * @desc:
  */
 public class BKDetailBO {
+
 }
