@@ -10,7 +10,6 @@
         android:id="@+id/mine_iv_item_type_tag"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginLeft="12dp"
         android:src="@mipmap/ic_type_tag"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -33,7 +32,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="12dp"
         android:drawableRight="@mipmap/ic_more"
         android:paddingBottom="6dp"
         android:paddingTop="6dp"

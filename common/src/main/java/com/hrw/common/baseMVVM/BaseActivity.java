@@ -12,15 +12,12 @@ import com.hrw.common.butterknife.ButterKnife;
  * @date:2018/09/29 11:31
  * @desc:
  */
-public abstract class BaseActivity<P extends BaseViewModel> extends AppCompatActivity {
-    protected P mPresenter;
+public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.initBindView(this);
-
-        mPresenter = createPresenter();
         setContentView(createLayout());
         initView();
     }
@@ -29,11 +26,5 @@ public abstract class BaseActivity<P extends BaseViewModel> extends AppCompatAct
 
     protected abstract int createLayout();
 
-    protected abstract P createPresenter();
 
-    @Override
-    protected void onDestroy() {
-
-        super.onDestroy();
-    }
 }
