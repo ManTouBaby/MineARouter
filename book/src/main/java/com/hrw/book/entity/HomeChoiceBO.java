@@ -1,5 +1,7 @@
 package com.hrw.book.entity;
 
+import com.hrw.smartrecyclerviewlibrary.BaseSmartBO;
+
 import java.util.List;
 
 /**
@@ -8,7 +10,7 @@ import java.util.List;
  * @date:2018/11/08 17:24
  * @desc:
  */
-public class HomeChoiceBO {
+public class HomeChoiceBO extends BaseSmartBO {
 
     /**
      * Category : 火热新书

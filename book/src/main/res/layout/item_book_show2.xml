@@ -10,6 +10,7 @@
         android:id="@+id/iv_book_bg"
         android:layout_width="59dp"
         android:layout_height="80dp"
+        android:scaleType="fitXY"
         android:src="@mipmap/ic_common_iv_bg" />
 
     <TextView
@@ -26,7 +27,7 @@
 
 
     <TextView
-        android:id="@+id/tv_book_decr"
+        android:id="@+id/tv_book_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"

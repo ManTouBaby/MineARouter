@@ -15,7 +15,7 @@ public class BKApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        MtRetrofitHelper.init(BKInterface.ROOT);
+        MtRetrofitHelper.init(BKInterface.ROOT_BOOK);
         MtLog.init(true);
     }
 }

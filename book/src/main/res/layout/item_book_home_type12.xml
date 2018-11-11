@@ -11,28 +11,24 @@
 
 
     <LinearLayout
-        android:id="@+id/ll_vertical_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"></LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_horizontal_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <include layout="@layout/item_book_show4" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1" />
 
+        <include layout="@layout/item_book_show4" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1" />
 
+        <include layout="@layout/item_book_show4" />
     </LinearLayout>
 </LinearLayout>

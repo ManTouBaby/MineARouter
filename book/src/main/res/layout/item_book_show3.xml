@@ -10,6 +10,7 @@
         android:id="@+id/iv_book_bg"
         android:layout_width="77dp"
         android:layout_height="100dp"
+        android:scaleType="fitXY"
         android:src="@mipmap/ic_common_iv_bg" />
 
     <TextView
