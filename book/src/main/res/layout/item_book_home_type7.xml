@@ -3,17 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/windows_bg"
-    android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+    android:orientation="vertical">
 
-    <include layout="@layout/include_book_more_layout" />
+    <include layout="@layout/include_driver_line_h4dp" />
+
+    <include
+        layout="@layout/include_book_more_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp" />
 
 
     <LinearLayout
         android:id="@+id/ll_vertical_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:orientation="vertical">
 
     </LinearLayout>
@@ -22,6 +29,8 @@
         android:id="@+id/ll_horizontal_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:orientation="horizontal">
 
 
@@ -42,6 +51,8 @@
         android:id="@+id/ll_horizontal_container2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:orientation="horizontal">
 
 

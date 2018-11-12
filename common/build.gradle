@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.ext.androidConfig.compileSdkVersion
+    compileSdkVersion 26
 
     defaultConfig {
         minSdkVersion rootProject.ext.androidConfig.minSdkVersion
@@ -35,8 +35,7 @@ allprojects {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     api rootProject.ext.dependencies.appcompat_v7
     api rootProject.ext.dependencies.design
     api rootProject.ext.dependencies.retrofit
@@ -52,9 +51,8 @@ dependencies {
     api rootProject.ext.dependencies.mine_smart_recyclerview
     api rootProject.ext.dependencies.banner
     api rootProject.ext.dependencies.arouter_api
-//    api rootProject.ext.dependencies.arouter_compiler
+    //    api rootProject.ext.dependencies.arouter_compiler
     api rootProject.ext.dependencies.lifecycle_extensions
     api rootProject.ext.dependencies.room_runtime
     api rootProject.ext.dependencies.room_rxjava2
-
 }

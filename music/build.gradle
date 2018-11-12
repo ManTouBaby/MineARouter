@@ -5,7 +5,7 @@ if (isModule.toBoolean()) {
 }
 
 android {
-    compileSdkVersion rootProject.ext.androidConfig.compileSdkVersion
+    compileSdkVersion 26
 
 //    dataBinding {
 //        enabled = true

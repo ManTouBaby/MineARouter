@@ -5,7 +5,7 @@ if (isModule.toBoolean()) {
 }
 
 android {
-    compileSdkVersion rootProject.ext.androidConfig.compileSdkVersion
+    compileSdkVersion 26
     defaultConfig {
 //        applicationId "com.hrw.arouter"
         minSdkVersion rootProject.ext.androidConfig.minSdkVersion

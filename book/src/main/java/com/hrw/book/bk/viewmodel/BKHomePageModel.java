@@ -26,7 +26,7 @@ public class BKHomePageModel extends BaseViewModel {
 
 
     public BKHomePageModel() {
-        mBkRepository = new BKRepository(this);
+        mBkRepository = new BKRepository();
     }
 
     public MutableLiveData<List<HomeChoiceBannerBO>> getHomeChoiceBannerData() {
@@ -49,4 +49,6 @@ public class BKHomePageModel extends BaseViewModel {
         isOnRefresh = mBkRepository.getIsOnRefresh();
         return isOnRefresh;
     }
+
+
 }

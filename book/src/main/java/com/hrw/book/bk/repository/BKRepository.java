@@ -3,7 +3,6 @@ package com.hrw.book.bk.repository;
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableBoolean;
 
-import com.hrw.book.bk.viewmodel.BKHomePageModel;
 import com.hrw.book.entity.HomeChoiceBO;
 import com.hrw.book.entity.HomeChoiceBannerBO;
 import com.hrw.book.service.IBKHomePage;
@@ -20,7 +19,6 @@ import java.util.List;
  * @desc:
  */
 public class BKRepository extends BaseRepository {
-    //    BKHomePageModel mHomePageModel;
     IBKHomePage mIbkHomePage;
     ObservableBoolean isOnRefresh = new ObservableBoolean();
     ObservableBoolean isOnLoadData = new ObservableBoolean();
@@ -30,8 +28,7 @@ public class BKRepository extends BaseRepository {
 
     String[] mHomeItemTypeSort = {"重磅推荐", "火热新书", "分类导航", "热门连载", "重推书单", "完本精选"};
 
-    public BKRepository(BKHomePageModel homePageModel) {
-//        mHomePageModel = homePageModel;
+    public BKRepository() {
         mIbkHomePage = MtRetrofitHelper.getRetrofit().createClass(IBKHomePage.class);
     }
 

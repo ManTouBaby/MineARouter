@@ -4,7 +4,7 @@ if (isModule.toBoolean()) {
     apply plugin: 'com.android.library'
 }
 android {
-    compileSdkVersion rootProject.ext.androidConfig.compileSdkVersion
+    compileSdkVersion 26
 
     defaultConfig {
         minSdkVersion rootProject.ext.androidConfig.minSdkVersion

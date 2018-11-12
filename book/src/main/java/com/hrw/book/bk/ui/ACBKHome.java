@@ -28,7 +28,7 @@ import java.util.List;
 
 import static com.hrw.common.servicePath.BKInterface.ROOT_BOOK_IMG;
 
-public class ACBKHome extends BaseActivity {
+public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
     @BindView(R.id.swl_book_home_container)
     SwipeRefreshLayout mSRLayout;
     //    @BindView(R.id.rl_book_home_item_show)
@@ -40,6 +40,7 @@ public class ACBKHome extends BaseActivity {
     @Override
     protected void initView() {
         initRecyclerView();
+        mSRLayout.setOnRefreshListener(this);
         mBkHomePageModel = ViewModelProviders.of(this).get(BKHomePageModel.class);
         mBkHomePageModel.getHomeChoiceData().observe(this, new Observer<List<HomeChoiceBO>>() {
             @Override
@@ -190,4 +191,8 @@ public class ACBKHome extends BaseActivity {
         return view;
     }
 
+    @Override
+    public void onRefresh() {
+
+    }
 }
