@@ -33,15 +33,19 @@ public class BKRepository extends BaseRepository {
     }
 
     public MutableLiveData<List<HomeChoiceBannerBO>> getHomeChoiceBannerData() {
+        isOnLoadData.set(true);
+        isOnRefresh.set(true);
         subscribe(mIbkHomePage.getHomeChoiceBannerData(), new MtBaseObserver<MtResultBean1<List<HomeChoiceBannerBO>>>() {
             @Override
             public void onLoadError(Throwable throwable) {
-
+                isOnLoadData.set(false);
+                isOnRefresh.set(false);
             }
 
             @Override
             public void onLoadSuccess(MtResultBean1<List<HomeChoiceBannerBO>> o) {
                 isOnLoadData.set(false);
+                isOnRefresh.set(false);
                 if (o.getStatus() == 1) {
                     mHomeChoiceBannerBOS.setValue(o.getData());
                 }
@@ -51,14 +55,19 @@ public class BKRepository extends BaseRepository {
     }
 
     public MutableLiveData<List<HomeChoiceBO>> getHomeChoiceData() {
+        isOnLoadData.set(true);
+        isOnRefresh.set(true);
         subscribe(mIbkHomePage.getHomeChoiceData(), new MtBaseObserver<MtResultBean1<List<HomeChoiceBO>>>() {
             @Override
             public void onLoadError(Throwable throwable) {
-
+                isOnLoadData.set(false);
+                isOnRefresh.set(false);
             }
 
             @Override
             public void onLoadSuccess(MtResultBean1<List<HomeChoiceBO>> o) {
+                isOnLoadData.set(false);
+                isOnRefresh.set(false);
                 if (o.getStatus() == 1) {
                     int index = -1;
                     for (int i = 0; i < mHomeItemTypeSort.length; i++) {

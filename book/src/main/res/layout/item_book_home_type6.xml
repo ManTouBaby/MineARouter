@@ -23,16 +23,27 @@
         android:orientation="horizontal">
 
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1" />
-
+        <include
+            android:id="@+id/i_horizontal_1"
+            layout="@layout/item_book_show3" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1" />
+
+        <include
+            android:id="@+id/i_horizontal_2"
+            layout="@layout/item_book_show3" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <include
+            android:id="@+id/i_horizontal_3"
+            layout="@layout/item_book_show3" />
 
     </LinearLayout>
 
@@ -45,16 +56,27 @@
         android:orientation="horizontal">
 
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1" />
-
+        <include
+            android:id="@+id/i_horizontal_4"
+            layout="@layout/item_book_show3" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1" />
+
+        <include
+            android:id="@+id/i_horizontal_5"
+            layout="@layout/item_book_show3" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <include
+            android:id="@+id/i_horizontal_6"
+            layout="@layout/item_book_show3" />
 
     </LinearLayout>
 </LinearLayout>

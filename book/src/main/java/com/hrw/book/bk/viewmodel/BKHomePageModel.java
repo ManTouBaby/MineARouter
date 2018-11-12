@@ -30,11 +30,13 @@ public class BKHomePageModel extends BaseViewModel {
     }
 
     public MutableLiveData<List<HomeChoiceBannerBO>> getHomeChoiceBannerData() {
+//        isOnRefresh.set(true);
         mHomeChoiceBannerBOS = mBkRepository.getHomeChoiceBannerData();
         return mHomeChoiceBannerBOS;
     }
 
     public MutableLiveData<List<HomeChoiceBO>> getHomeChoiceData() {
+//        isOnRefresh.set(true);
         mHomeChoiceBOS = mBkRepository.getHomeChoiceData();
         return mHomeChoiceBOS;
     }

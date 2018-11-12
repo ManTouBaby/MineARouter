@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_banner"
-        android:layout_width="match_parent"
-        android:layout_height="168dp"
-        android:background="#476347" />
+        android:layout_width="300dp"
+        android:layout_height="158dp"
+        android:layout_centerHorizontal="true"
+        android:clipChildren="false" />
 
     <LinearLayout
         android:id="@+id/mine_cl_menu_container"
         android:layout_width="match_parent"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_below="@+id/vp_banner"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp">
 
         <LinearLayout
             android:id="@+id/ll_book_home_rank"
@@ -140,4 +142,4 @@
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

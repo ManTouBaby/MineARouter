@@ -15,15 +15,13 @@
         android:layout_marginRight="16dp" />
 
 
-    <LinearLayout
-        android:id="@+id/ll_vertical_container"
+    <include
+        android:id="@+id/i_vertical_1"
+        layout="@layout/item_book_show1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:orientation="vertical">
-
-    </LinearLayout>
+        android:layout_marginRight="16dp" />
 
     <LinearLayout
         android:id="@+id/ll_horizontal_container"
@@ -34,16 +32,27 @@
         android:orientation="horizontal">
 
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1" />
-
+        <include
+            android:id="@+id/i_horizontal_1"
+            layout="@layout/item_book_show3" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1" />
+
+        <include
+            android:id="@+id/i_horizontal_2"
+            layout="@layout/item_book_show3" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <include
+            android:id="@+id/i_horizontal_3"
+            layout="@layout/item_book_show3" />
 
     </LinearLayout>
 
@@ -56,16 +65,27 @@
         android:orientation="horizontal">
 
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1" />
-
+        <include
+            android:id="@+id/i_horizontal_4"
+            layout="@layout/item_book_show3" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1" />
+
+        <include
+            android:id="@+id/i_horizontal_5"
+            layout="@layout/item_book_show3" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <include
+            android:id="@+id/i_horizontal_6"
+            layout="@layout/item_book_show3" />
 
     </LinearLayout>
 </LinearLayout>
