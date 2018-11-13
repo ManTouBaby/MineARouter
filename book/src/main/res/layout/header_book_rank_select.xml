@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <RadioGroup
+        android:id="@+id/rg_book_reader_sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_book_reader_sex_man"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_red_select_bg"
+            android:button="@null"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:text="男生"
+            android:textColor="@color/color_white_gray_check" />
+
+        <RadioButton
+            android:id="@+id/rb_book_reader_sex_lady"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/icon_red_select_bg"
+            android:button="@null"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:text="女生"
+            android:textColor="@color/color_white_gray_check" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/rg_book_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_book_type_hot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_red_select_bg"
+            android:button="@null"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:text="最热"
+            android:textColor="@color/color_white_gray_check" />
+
+        <RadioButton
+            android:id="@+id/rb_book_type_commend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/icon_red_select_bg"
+            android:button="@null"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:text="推荐"
+            android:textColor="@color/color_white_gray_check" />
+
+        <RadioButton
+            android:id="@+id/rb_book_type_over"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/icon_red_select_bg"
+            android:button="@null"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:text="完结"
+            android:textColor="@color/color_white_gray_check" />
+
+        <RadioButton
+            android:id="@+id/rb_book_type_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/icon_red_select_bg"
+            android:button="@null"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:text="收藏"
+            android:textColor="@color/color_white_gray_check" />
+
+
+        <RadioButton
+            android:id="@+id/rb_book_type_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/icon_red_select_bg"
+            android:button="@null"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:text="新书"
+            android:textColor="@color/color_white_gray_check" />
+
+        <RadioButton
+            android:id="@+id/rb_book_type_vote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/icon_red_select_bg"
+            android:button="@null"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:text="评分"
+            android:textColor="@color/color_white_gray_check" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/rg_book_time_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_book_time_type_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_red_select_bg"
+            android:button="@null"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:text="周榜"
+            android:textColor="@color/color_white_gray_check" />
+
+        <RadioButton
+            android:id="@+id/rb_book_time_type_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/icon_red_select_bg"
+            android:button="@null"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:text="月榜"
+            android:textColor="@color/color_white_gray_check" />
+
+        <RadioButton
+            android:id="@+id/rb_book_time_type_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/icon_red_select_bg"
+            android:button="@null"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+            android:text="总榜"
+            android:textColor="@color/color_white_gray_check" />
+    </RadioGroup>
+</LinearLayout>

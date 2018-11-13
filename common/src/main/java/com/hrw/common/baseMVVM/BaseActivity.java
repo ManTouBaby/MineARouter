@@ -1,5 +1,6 @@
 package com.hrw.common.baseMVVM;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -20,11 +21,24 @@ public abstract class BaseActivity extends AppCompatActivity {
         ButterKnife.initBindView(this);
         setContentView(createLayout());
         initView();
+        initListener();
     }
 
     protected abstract void initView();
+    protected abstract void initListener();
 
     protected abstract int createLayout();
+
+    protected void gotoActivity(Class<?> aClass) {
+        Intent intent = new Intent(this, aClass);
+        sendBroadcast(intent);
+    }
+
+    protected void gotoActivity(Class<?> aClass, Bundle bundle) {
+        Intent intent = new Intent(this, aClass);
+        intent.putExtras(bundle);
+        sendBroadcast(intent);
+    }
 
 
 }

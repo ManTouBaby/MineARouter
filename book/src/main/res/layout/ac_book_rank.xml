@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/windows_bg">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/mine_toolBar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/include_toolbar" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="排行榜"
+            android:textColor="@color/text_white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:src="@mipmap/ic_search"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_book_rank_list_show"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mine_toolBar_container" />
+
+    <TextView
+        android:id="@+id/tv_current_select"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:background="@color/bg_main_white"
+        android:gravity="center"
+        android:text="男生 · 最热 · 月榜"
+        android:textColor="@color/text_main_red"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/mine_toolBar_container" />
+</android.support.constraint.ConstraintLayout>

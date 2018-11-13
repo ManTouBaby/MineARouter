@@ -1,5 +1,7 @@
 package com.hrw.common.baseMVVM;
 
+import android.databinding.ObservableBoolean;
+
 import com.hrw.common.net.MtResultBean1;
 
 import io.reactivex.Observable;
@@ -14,10 +16,20 @@ import io.reactivex.schedulers.Schedulers;
  * @desc:
  */
 public class BaseRepository {
+    protected ObservableBoolean mIsOnRefresh = new ObservableBoolean();
+    protected ObservableBoolean mIsOnLoadData = new ObservableBoolean();
+
     protected <T extends MtResultBean1> void subscribe(Observable<T> observable, Observer<T> observer) {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
     }
 
+    public ObservableBoolean getIsOnLoadData() {
+        return mIsOnLoadData;
+    }
+
+    public ObservableBoolean getIsOnRefresh() {
+        return mIsOnRefresh;
+    }
 }

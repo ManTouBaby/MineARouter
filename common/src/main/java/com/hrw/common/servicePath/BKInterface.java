@@ -6,6 +6,6 @@ package com.hrw.common.servicePath;
  * @desc:
  */
 public interface BKInterface {
-    String ROOT_BOOK = "https://quapp.1122dh.com";
+    String ROOT_BOOK = "https://quapp.1122dh.com/";
     String ROOT_BOOK_IMG = "https://imgapi.jiaston.com/BookFiles/BookImages/";
 }

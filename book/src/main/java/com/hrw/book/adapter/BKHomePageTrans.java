@@ -13,8 +13,10 @@ import android.view.View;
 public class BKHomePageTrans implements ViewPager.PageTransformer {
     final float SCALE_MAX = 0.8f;
     final float ALPHA_MAX = 0.5f;
+
     @Override
     public void transformPage(@NonNull View page, float position) {
+        System.out.println("位置position：" + position);
         float scale = (position < 0)
                 ? ((1 - SCALE_MAX) * position + 1)
                 : ((SCALE_MAX - 1) * position + 1);
@@ -22,7 +24,7 @@ public class BKHomePageTrans implements ViewPager.PageTransformer {
                 ? ((1 - ALPHA_MAX) * position + 1)
                 : ((ALPHA_MAX - 1) * position + 1);
         //为了滑动过程中，page间距不变，这里做了处理
-        if(position < 0) {
+        if (position < 0) {
             ViewCompat.setPivotX(page, page.getWidth());
             ViewCompat.setPivotY(page, page.getHeight() / 2);
         } else {

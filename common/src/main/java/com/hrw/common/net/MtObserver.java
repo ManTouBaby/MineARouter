@@ -8,7 +8,7 @@ import io.reactivex.disposables.Disposable;
  * @date:2018/11/09 23:08
  * @desc:
  */
-public abstract class MtBaseObserver<T> implements Observer<T> {
+public abstract class MtObserver<T> implements Observer<T> {
 
     @Override
     public void onSubscribe(Disposable disposable) {

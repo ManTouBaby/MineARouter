@@ -15,4 +15,5 @@
     <color name="text_gray_four">#848484</color>
     <color name="text_gray_five">#dcdcdc</color>
     <color name="bg_main_red">#CF403D</color>
+    <color name="bg_main_white">#FFFFFF</color>
 </resources>

@@ -14,15 +14,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.hrw.book.R;
-import com.hrw.book.adapter.BKHOmeListAdapter;
 import com.hrw.book.adapter.BKHomeBannerAdapter;
+import com.hrw.book.adapter.BKHomeListAdapter;
 import com.hrw.book.adapter.BKHomePageTrans;
 import com.hrw.book.bk.viewmodel.BKHomePageModel;
 import com.hrw.book.entity.HomeChoiceBO;
 import com.hrw.book.entity.HomeChoiceBannerBO;
 import com.hrw.common.baseMVVM.BaseActivity;
+import com.hrw.common.utils.GlideUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefre
     RecyclerView mRecyclerView;
     ViewPager mViewPager;
 
-    BKHOmeListAdapter mBkhOmeListAdapter;
+    BKHomeListAdapter mBkhOmeListAdapter;
     BKHomeBannerAdapter mBannerAdapter;
     BKHomePageModel mBkHomePageModel;
 
@@ -43,11 +43,11 @@ public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefre
         initViewPage();
         mSRLayout = findViewById(R.id.swl_book_home_container);
         mSRLayout.setOnRefreshListener(this);
-        listenerData();
 
     }
 
-    private void listenerData() {
+    @Override
+    protected void initListener() {
         mBkHomePageModel = ViewModelProviders.of(this).get(BKHomePageModel.class);
         mBkHomePageModel.getHomeChoiceData().observe(this, new Observer<List<HomeChoiceBO>>() {
             @Override
@@ -63,7 +63,7 @@ public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefre
                 for (HomeChoiceBannerBO bannerBO : homeChoiceBannerBOS) {
                     View view = LayoutInflater.from(getBaseContext()).inflate(R.layout.banner_ads_bk_show, null);
                     ImageView imageView = view.findViewById(R.id.iv_ads_bk_bg);
-                    Glide.with(getBaseContext()).load(bannerBO.getImgurl()).into(imageView);
+                    GlideUtils.bindIMG(getBaseContext(), bannerBO.getImgurl(), imageView);
                     views.add(view);
                 }
                 mBannerAdapter.setViews(views);
@@ -79,6 +79,7 @@ public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefre
         });
     }
 
+
     private void initViewPage() {
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -86,7 +87,6 @@ public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefre
         mBannerAdapter = new BKHomeBannerAdapter();
         mViewPager.setAdapter(mBannerAdapter);
         mViewPager.setPageTransformer(true, new BKHomePageTrans());
-
     }
 
     private void initRecyclerView() {
@@ -95,7 +95,7 @@ public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefre
         mRecyclerView = findViewById(R.id.rl_book_home_item_show);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);
-        mBkhOmeListAdapter = new BKHOmeListAdapter(this, R.layout.item_book_home_type5);
+        mBkhOmeListAdapter = new BKHomeListAdapter(this, R.layout.item_book_home_type5);
         mRecyclerView.setAdapter(mBkhOmeListAdapter);
         mBkhOmeListAdapter.setHeaderView(headerBanner);
         mBkhOmeListAdapter.setItemType(1, R.layout.item_book_home_type1);

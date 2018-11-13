@@ -3,9 +3,10 @@ package com.hrw.book.bk.viewmodel;
 import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableBoolean;
 
-import com.hrw.book.bk.repository.BKRepository;
+import com.hrw.book.bk.repository.BKHomeRepository;
 import com.hrw.book.entity.HomeChoiceBO;
 import com.hrw.book.entity.HomeChoiceBannerBO;
+import com.hrw.book.service.IBKType;
 import com.hrw.common.baseMVVM.BaseViewModel;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
  * @desc:
  */
 public class BKHomePageModel extends BaseViewModel {
-    BKRepository mBkRepository;
+    BKHomeRepository mBkRepository;
 
     ObservableBoolean isOnRefresh;
     ObservableBoolean isOnLoadData;
@@ -26,18 +27,16 @@ public class BKHomePageModel extends BaseViewModel {
 
 
     public BKHomePageModel() {
-        mBkRepository = new BKRepository();
+        mBkRepository = new BKHomeRepository();
     }
 
     public MutableLiveData<List<HomeChoiceBannerBO>> getHomeChoiceBannerData() {
-//        isOnRefresh.set(true);
-        mHomeChoiceBannerBOS = mBkRepository.getHomeChoiceBannerData();
+        mHomeChoiceBannerBOS = mBkRepository.getHomeChoiceBannerData(IBKType.SEX_MAN);
         return mHomeChoiceBannerBOS;
     }
 
     public MutableLiveData<List<HomeChoiceBO>> getHomeChoiceData() {
-//        isOnRefresh.set(true);
-        mHomeChoiceBOS = mBkRepository.getHomeChoiceData();
+        mHomeChoiceBOS = mBkRepository.getHomeChoiceData(IBKType.SEX_MAN);
         return mHomeChoiceBOS;
     }
 

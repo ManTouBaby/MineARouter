@@ -7,7 +7,7 @@
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_banner"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="158dp"
         android:layout_centerHorizontal="true"
         android:clipChildren="false" />
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:gravity="center"
-                android:text="排行"
+                android:text="榜单"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:gravity="center"
-                android:text="发现"
+                android:text="书单"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:gravity="center"
-                android:text="精选"
+                android:text="推荐"
                 android:textSize="12sp" />
         </LinearLayout>
 
