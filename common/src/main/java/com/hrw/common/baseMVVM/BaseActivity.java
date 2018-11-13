@@ -31,13 +31,13 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void gotoActivity(Class<?> aClass) {
         Intent intent = new Intent(this, aClass);
-        sendBroadcast(intent);
+        startActivity(intent);
     }
 
     protected void gotoActivity(Class<?> aClass, Bundle bundle) {
         Intent intent = new Intent(this, aClass);
         intent.putExtras(bundle);
-        sendBroadcast(intent);
+        startActivity(intent);
     }
 
 

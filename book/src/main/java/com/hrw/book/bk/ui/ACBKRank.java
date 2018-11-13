@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.hrw.book.R;
@@ -20,6 +21,7 @@ import com.hrw.common.utils.GlideUtils;
 import com.hrw.smartrecyclerviewlibrary.SmartAdapter;
 import com.hrw.smartrecyclerviewlibrary.SmartVH;
 
+import static android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING;
 import static com.hrw.common.servicePath.BKInterface.ROOT_BOOK_IMG;
 
 /**
@@ -37,6 +39,7 @@ public class ACBKRank extends BaseActivity implements RadioGroup.OnCheckedChange
     BKHomeRankModel mBkHomeRankModel;
 
     SmartAdapter<BKListItemBO> mSmartAdapter;
+    private boolean mHasNext;
 
 
     String sex = IBKType.SEX_MAN;
@@ -48,9 +51,9 @@ public class ACBKRank extends BaseActivity implements RadioGroup.OnCheckedChange
     protected void initView() {
         mBkHomeRankModel = ViewModelProviders.of(this).get(BKHomeRankModel.class);
         initRecyclerView();
-        mRgSex.getChildAt(0).setSelected(true);
-        mRgType.getChildAt(0).setSelected(true);
-        mRgTimeType.getChildAt(0).setSelected(true);
+        ((RadioButton) mRgSex.getChildAt(0)).setChecked(true);
+        ((RadioButton) mRgType.getChildAt(0)).setChecked(true);
+        ((RadioButton) mRgTimeType.getChildAt(0)).setChecked(true);
     }
 
     @Override
@@ -62,7 +65,12 @@ public class ACBKRank extends BaseActivity implements RadioGroup.OnCheckedChange
         mBkHomeRankModel.getBookList(sex, type, timeType, page).observe(this, new Observer<BookList>() {
             @Override
             public void onChanged(@Nullable BookList bookList) {
-                mSmartAdapter.setDate(bookList.getBookList());
+                mHasNext = bookList.isHasNext();
+                if (bookList.getPage() == 1) {
+                    mSmartAdapter.setDate(bookList.getBookList());
+                } else {
+                    mSmartAdapter.addDate(bookList.getBookList());
+                }
             }
         });
     }
@@ -96,24 +104,20 @@ public class ACBKRank extends BaseActivity implements RadioGroup.OnCheckedChange
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                int lastIndex = layoutManager.findLastVisibleItemPosition();
-                int firstIndex = layoutManager.findFirstVisibleItemPosition();
-                int count = layoutManager.getItemCount();
-                int visibleItemCount = recyclerView.getChildCount();
-                if (count - visibleItemCount <= firstIndex) {
-                    page++;
-                    mBkHomeRankModel.getBookList(sex, type, timeType, page);
-                }
-                System.out.println("firstIndex:" + firstIndex + "  lastIndex:" + lastIndex + "  visibleItemCount:" + visibleItemCount + "   count:" + count);
             }
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-//
-//                if (SCROLL_STATE_DRAGGING == newState) {
-//
-//                }
+                int lastIndex = layoutManager.findLastVisibleItemPosition();
+                int firstIndex = layoutManager.findFirstVisibleItemPosition();
+                int count = layoutManager.getItemCount();
+                int visibleItemCount = recyclerView.getChildCount();
+                if (count - visibleItemCount <= firstIndex && mHasNext && SCROLL_STATE_DRAGGING == newState) {
+                    page++;
+                    mBkHomeRankModel.getBookList(sex, type, timeType, page);
+                    System.out.println("firstIndex:" + firstIndex + "  lastIndex:" + lastIndex + "  visibleItemCount:" + visibleItemCount + "   count:" + count);
+                }
             }
         });
 
@@ -172,6 +176,7 @@ public class ACBKRank extends BaseActivity implements RadioGroup.OnCheckedChange
                 timeType = IBKType.TIME_TYPE_TOTAL;
                 break;
         }
+        page = 1;
         mBkHomeRankModel.getBookList(sex, type, timeType, page);
     }
 

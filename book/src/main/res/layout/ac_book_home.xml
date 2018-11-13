@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:gravity="center"
-            android:text="米读书城"
+            android:text="书城"
             android:textColor="@color/text_white"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"

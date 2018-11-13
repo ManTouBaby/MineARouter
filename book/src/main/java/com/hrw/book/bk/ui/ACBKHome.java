@@ -27,7 +27,7 @@ import com.hrw.common.utils.GlideUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
     SwipeRefreshLayout mSRLayout;
     //    @BindView(R.id.rl_book_home_item_show)
     RecyclerView mRecyclerView;
@@ -91,6 +91,11 @@ public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefre
 
     private void initRecyclerView() {
         View headerBanner = LayoutInflater.from(this).inflate(R.layout.header_book_home_banner, null);
+        headerBanner.findViewById(R.id.ll_book_home_rank).setOnClickListener(this);
+        headerBanner.findViewById(R.id.ll_book_home_list).setOnClickListener(this);
+        headerBanner.findViewById(R.id.ll_book_home_type).setOnClickListener(this);
+        headerBanner.findViewById(R.id.ll_book_home_good).setOnClickListener(this);
+        headerBanner.findViewById(R.id.ll_book_home_complete).setOnClickListener(this);
         mViewPager = headerBanner.findViewById(R.id.vp_banner);
         mRecyclerView = findViewById(R.id.rl_book_home_item_show);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -107,6 +112,23 @@ public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefre
     }
 
     @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ll_book_home_rank:
+                gotoActivity(ACBKRank.class);
+                break;
+            case R.id.ll_book_home_list:
+                break;
+            case R.id.ll_book_home_type:
+                break;
+            case R.id.ll_book_home_good:
+                break;
+            case R.id.ll_book_home_complete:
+                break;
+        }
+    }
+
+    @Override
     protected int createLayout() {
         return R.layout.ac_book_home;
     }
@@ -116,4 +138,6 @@ public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefre
         mBkHomePageModel.getHomeChoiceBannerData();
         mBkHomePageModel.getHomeChoiceData();
     }
+
+
 }
