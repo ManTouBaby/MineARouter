@@ -5,5 +5,6 @@
     <application android:theme="@style/AppTheme">
         <activity android:name=".bk.ui.ACBKHome"></activity>
         <activity android:name=".bk.ui.ACBKRank" />
+        <activity android:name=".bkdetails.ui.ACBKDetails" />
     </application>
 </manifest>

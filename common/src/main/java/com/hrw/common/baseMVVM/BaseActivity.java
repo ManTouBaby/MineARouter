@@ -1,11 +1,13 @@
 package com.hrw.common.baseMVVM;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.hrw.common.butterknife.ButterKnife;
+import com.hrw.common.utils.MtStatusBarHelper;
 
 /**
  * @version 1.0.0
@@ -20,11 +22,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.initBindView(this);
         setContentView(createLayout());
+        MtStatusBarHelper.instance(this)
+                .setBGColor(Color.parseColor("#CF403D"))
+                .setFullScreen(false);
         initView();
         initListener();
     }
 
     protected abstract void initView();
+
     protected abstract void initListener();
 
     protected abstract int createLayout();

@@ -21,6 +21,7 @@
         <activity android:name=".bk.ui.ACBKRank">
 
         </activity>
+        <activity android:name=".bkdetails.ui.ACBKDetails" />
     </application>
 
 </manifest>

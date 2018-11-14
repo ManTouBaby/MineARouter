@@ -13,11 +13,13 @@ import android.widget.RadioGroup;
 
 import com.hrw.book.R;
 import com.hrw.book.bk.viewmodel.BKHomeRankModel;
+import com.hrw.book.bkdetails.ui.ACBKDetails;
 import com.hrw.book.entity.BKListItemBO;
 import com.hrw.book.entity.BookList;
 import com.hrw.book.service.IBKType;
 import com.hrw.common.baseMVVM.BaseActivity;
 import com.hrw.common.utils.GlideUtils;
+import com.hrw.smartrecyclerviewlibrary.OnSmartItemClickListener;
 import com.hrw.smartrecyclerviewlibrary.SmartAdapter;
 import com.hrw.smartrecyclerviewlibrary.SmartVH;
 
@@ -30,7 +32,7 @@ import static com.hrw.common.servicePath.BKInterface.ROOT_BOOK_IMG;
  * @date:2018/11/13 11:22
  * @desc:
  */
-public class ACBKRank extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
+public class ACBKRank extends BaseActivity implements RadioGroup.OnCheckedChangeListener, OnSmartItemClickListener<BKListItemBO> {
     RecyclerView mRecyclerView;
     RadioGroup mRgSex;
     RadioGroup mRgType;
@@ -98,6 +100,7 @@ public class ACBKRank extends BaseActivity implements RadioGroup.OnCheckedChange
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
         mSmartAdapter.setHeaderView(header);
+        mSmartAdapter.setOnSmartItemClickListener(this);
         mRecyclerView.setAdapter(mSmartAdapter);
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -181,4 +184,8 @@ public class ACBKRank extends BaseActivity implements RadioGroup.OnCheckedChange
     }
 
 
+    @Override
+    public void onSmartItemClick(BKListItemBO bkListItemBO, int i) {
+        gotoActivity(ACBKDetails.class);
+    }
 }
