@@ -1,7 +1,6 @@
 package com.hrw.book.bk.viewmodel;
 
 import android.arch.lifecycle.MutableLiveData;
-import android.databinding.ObservableBoolean;
 
 import com.hrw.book.bk.repository.BKHomeRepository;
 import com.hrw.book.entity.HomeChoiceBO;
@@ -16,39 +15,23 @@ import java.util.List;
  * @date:2018/11/07 22:48
  * @desc:
  */
-public class BKHomePageModel extends BaseViewModel {
-    BKHomeRepository mBkRepository;
-
-    ObservableBoolean isOnRefresh;
-    ObservableBoolean isOnLoadData;
-
+public class BKHomePageModel extends BaseViewModel<BKHomeRepository> {
     MutableLiveData<List<HomeChoiceBO>> mHomeChoiceBOS;
     MutableLiveData<List<HomeChoiceBannerBO>> mHomeChoiceBannerBOS;
 
-
-    public BKHomePageModel() {
-        mBkRepository = new BKHomeRepository();
+    @Override
+    protected BKHomeRepository createRepository() {
+        return new BKHomeRepository();
     }
 
     public MutableLiveData<List<HomeChoiceBannerBO>> getHomeChoiceBannerData() {
-        mHomeChoiceBannerBOS = mBkRepository.getHomeChoiceBannerData(IBKType.SEX_MAN);
+        mHomeChoiceBannerBOS = mRepository.getHomeChoiceBannerData(IBKType.SEX_MAN);
         return mHomeChoiceBannerBOS;
     }
 
     public MutableLiveData<List<HomeChoiceBO>> getHomeChoiceData() {
-        mHomeChoiceBOS = mBkRepository.getHomeChoiceData(IBKType.SEX_MAN);
+        mHomeChoiceBOS = mRepository.getHomeChoiceData(IBKType.SEX_MAN);
         return mHomeChoiceBOS;
-    }
-
-
-    public ObservableBoolean getIsOnLoadData() {
-        isOnLoadData = mBkRepository.getIsOnLoadData();
-        return isOnLoadData;
-    }
-
-    public ObservableBoolean getIsOnRefresh() {
-        isOnRefresh = mBkRepository.getIsOnRefresh();
-        return isOnRefresh;
     }
 
 

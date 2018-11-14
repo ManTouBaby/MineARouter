@@ -16,10 +16,10 @@ public class BKDetailBO {
      * Img : tiandaotushuguan.jpg
      * Author : 横扫天涯
      * Desc : 张悬穿越异界，成了一名光荣的教师，脑海中多出了一个神秘的图书馆。
-     　　 只要他看过的东西，无论人还是物，都能自动形成书籍，记录下对方各种各样的缺点，于是，他牛大了！
-     　　 “昊天大帝，你怎么不喜欢穿内裤啊？堂堂大帝，能不能注意点形象？”
-     　　 “玲珑仙子，你如果晚上再失眠，可以找我嘛，我这个人唱安眠曲很有一套的！”
-     　　 “还有你，乾坤魔君，能不能少吃...
+     * 　　 只要他看过的东西，无论人还是物，都能自动形成书籍，记录下对方各种各样的缺点，于是，他牛大了！
+     * 　　 “昊天大帝，你怎么不喜欢穿内裤啊？堂堂大帝，能不能注意点形象？”
+     * 　　 “玲珑仙子，你如果晚上再失眠，可以找我嘛，我这个人唱安眠曲很有一套的！”
+     * 　　 “还有你，乾坤魔君，能不能少吃...
      * CId : 95
      * CName : 玄幻奇幻
      * LastTime : 11/8/2018 12:22:39 AM
@@ -179,7 +179,7 @@ public class BKDetailBO {
         private int BookId;
         private int TotalScore;
         private int VoterCount;
-        private int Score;
+        private String Score;
 
         public int getBookId() {
             return BookId;
@@ -205,11 +205,11 @@ public class BKDetailBO {
             this.VoterCount = VoterCount;
         }
 
-        public int getScore() {
+        public String getScore() {
             return Score;
         }
 
-        public void setScore(int Score) {
+        public void setScore(String Score) {
             this.Score = Score;
         }
     }
@@ -231,7 +231,7 @@ public class BKDetailBO {
         private String Img;
         private int LastChapterId;
         private String LastChapter;
-        private int Score;
+        private String Score;
 
         public int getId() {
             return Id;
@@ -281,11 +281,11 @@ public class BKDetailBO {
             this.LastChapter = LastChapter;
         }
 
-        public int getScore() {
+        public String getScore() {
             return Score;
         }
 
-        public void setScore(int Score) {
+        public void setScore(String Score) {
             this.Score = Score;
         }
     }

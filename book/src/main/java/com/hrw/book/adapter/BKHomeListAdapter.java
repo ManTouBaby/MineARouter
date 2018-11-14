@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide;
 import com.hrw.book.R;
 import com.hrw.book.entity.BKListItemBO;
 import com.hrw.book.entity.HomeChoiceBO;
-import com.hrw.common.utils.GlideUtils;
+import com.hrw.common.utils.MtGlideUtils;
 import com.hrw.smartrecyclerviewlibrary.SmartAdapter;
 import com.hrw.smartrecyclerviewlibrary.SmartVH;
 
@@ -117,7 +117,7 @@ public class BKHomeListAdapter extends SmartAdapter<HomeChoiceBO> {
         TextView tvBookDesc = view.findViewById(R.id.tv_book_desc);
         TextView tvBookAuthor = view.findViewById(R.id.tv_book_author);
         TextView tvBookType = view.findViewById(R.id.tv_book_type);
-        GlideUtils.bindIMG(mContext,ROOT_BOOK_IMG + listItemBO.getImg(),ivBookBG);
+        MtGlideUtils.bindIMG(mContext,ROOT_BOOK_IMG + listItemBO.getImg(),ivBookBG);
         tvBookName.setText(listItemBO.getName());
         tvBookDesc.setText(listItemBO.getDesc());
         tvBookAuthor.setText(listItemBO.getAuthor());
@@ -129,7 +129,7 @@ public class BKHomeListAdapter extends SmartAdapter<HomeChoiceBO> {
         ImageView ivBookBG = view.findViewById(R.id.iv_book_bg);
         TextView tvBookName = view.findViewById(R.id.tv_book_name);
         TextView tvBookAuthor = view.findViewById(R.id.tv_book_author);
-        GlideUtils.bindIMG(mContext,ROOT_BOOK_IMG + listItemBO.getImg(),ivBookBG);
+        MtGlideUtils.bindIMG(mContext,ROOT_BOOK_IMG + listItemBO.getImg(),ivBookBG);
         tvBookName.setText(listItemBO.getName());
         tvBookAuthor.setText(listItemBO.getAuthor());
         return view;

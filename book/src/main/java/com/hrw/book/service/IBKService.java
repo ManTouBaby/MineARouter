@@ -1,6 +1,7 @@
 package com.hrw.book.service;
 
 
+import com.hrw.book.entity.BKDetailBO;
 import com.hrw.book.entity.BookList;
 import com.hrw.book.entity.HomeChoiceBO;
 import com.hrw.book.entity.HomeChoiceBannerBO;
@@ -51,4 +52,12 @@ public interface IBKService {
                                                     @Path("time") @IBKType.IBKListByTime String time, @Path("page") int page);
 
 
+    /**
+     * 获取图书详细信息
+     *
+     * @param bookId
+     * @return
+     */
+    @GET("info/{bookId}.html")
+    Observable<MtResultBean1<BKDetailBO>> getBookDetail(@Path("bookId") int bookId);
 }

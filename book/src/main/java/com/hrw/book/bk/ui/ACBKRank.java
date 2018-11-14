@@ -2,6 +2,7 @@ package com.hrw.book.bk.ui;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,7 +19,7 @@ import com.hrw.book.entity.BKListItemBO;
 import com.hrw.book.entity.BookList;
 import com.hrw.book.service.IBKType;
 import com.hrw.common.baseMVVM.BaseActivity;
-import com.hrw.common.utils.GlideUtils;
+import com.hrw.common.utils.MtGlideUtils;
 import com.hrw.smartrecyclerviewlibrary.OnSmartItemClickListener;
 import com.hrw.smartrecyclerviewlibrary.SmartAdapter;
 import com.hrw.smartrecyclerviewlibrary.SmartVH;
@@ -87,7 +88,7 @@ public class ACBKRank extends BaseActivity implements RadioGroup.OnCheckedChange
                 smartVH.getText(R.id.tv_book_desc).setText(bkListItemBO.getDesc());
                 smartVH.getText(R.id.tv_book_score).setText(bkListItemBO.getScore() + "分");
                 ImageView imageView = smartVH.getImage(R.id.iv_book_bg);
-                GlideUtils.bindIMG(getBaseContext(), ROOT_BOOK_IMG + bkListItemBO.getImg(), imageView);
+                MtGlideUtils.bindIMG(getBaseContext(), ROOT_BOOK_IMG + bkListItemBO.getImg(), imageView);
             }
         };
         View header = LayoutInflater.from(this).inflate(R.layout.header_book_rank_select, null);
@@ -186,6 +187,8 @@ public class ACBKRank extends BaseActivity implements RadioGroup.OnCheckedChange
 
     @Override
     public void onSmartItemClick(BKListItemBO bkListItemBO, int i) {
-        gotoActivity(ACBKDetails.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("bookId", bkListItemBO.getId());
+        gotoActivity(ACBKDetails.class, bundle);
     }
 }

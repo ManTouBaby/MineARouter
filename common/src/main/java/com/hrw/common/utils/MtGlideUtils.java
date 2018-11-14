@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide;
  * @date:2018/11/13 16:07
  * @desc:
  */
-public class GlideUtils {
+public class MtGlideUtils {
     public static void bindIMG(Context mContext, String url, ImageView ivBookBG) {
         Glide.with(mContext).load(url).dontAnimate().into(ivBookBG);
     }

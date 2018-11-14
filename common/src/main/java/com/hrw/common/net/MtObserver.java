@@ -1,5 +1,7 @@
 package com.hrw.common.net;
 
+import com.hrw.common.utils.MtLog;
+
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -22,6 +24,7 @@ public abstract class MtObserver<T> implements Observer<T> {
 
     @Override
     public void onError(Throwable throwable) {
+        MtLog.d(throwable.toString());
         onLoadError(throwable);
     }
 

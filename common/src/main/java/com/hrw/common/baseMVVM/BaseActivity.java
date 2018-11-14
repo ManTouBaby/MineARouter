@@ -22,9 +22,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ButterKnife.initBindView(this);
         setContentView(createLayout());
-        MtStatusBarHelper.instance(this)
-                .setBGColor(Color.parseColor("#CF403D"))
-                .setFullScreen(false);
+        MtStatusBarHelper.instance(this).setBGColor(Color.parseColor("#CF403D"));
         initView();
         initListener();
     }

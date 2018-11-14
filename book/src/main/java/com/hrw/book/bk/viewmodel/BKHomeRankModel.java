@@ -13,13 +13,9 @@ import com.hrw.common.baseMVVM.BaseViewModel;
  * @date:2018/11/13 11:29
  * @desc:
  */
-public class BKHomeRankModel extends BaseViewModel {
+public class BKHomeRankModel extends BaseViewModel<BKRankRepository> {
     MutableLiveData<BookList> mBMutableLiveData;
-    BKRankRepository mBkRankRepository;
 
-    public BKHomeRankModel() {
-        mBkRankRepository = new BKRankRepository();
-    }
 
     /**
      * 获取图书列表
@@ -32,7 +28,12 @@ public class BKHomeRankModel extends BaseViewModel {
      */
     public MutableLiveData<BookList> getBookList(@IBKType.IBKReaderSex String sex, @IBKType.IBKListType String type,
                                                  @IBKType.IBKListByTime String time, int page) {
-        mBMutableLiveData = mBkRankRepository.getBookList(sex, type, time, page);
+        mBMutableLiveData = mRepository.getBookList(sex, type, time, page);
         return mBMutableLiveData;
+    }
+
+    @Override
+    protected BKRankRepository createRepository() {
+        return new BKRankRepository();
     }
 }

@@ -22,7 +22,7 @@ import com.hrw.book.bk.viewmodel.BKHomePageModel;
 import com.hrw.book.entity.HomeChoiceBO;
 import com.hrw.book.entity.HomeChoiceBannerBO;
 import com.hrw.common.baseMVVM.BaseActivity;
-import com.hrw.common.utils.GlideUtils;
+import com.hrw.common.utils.MtGlideUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +63,7 @@ public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefre
                 for (HomeChoiceBannerBO bannerBO : homeChoiceBannerBOS) {
                     View view = LayoutInflater.from(getBaseContext()).inflate(R.layout.banner_ads_bk_show, null);
                     ImageView imageView = view.findViewById(R.id.iv_ads_bk_bg);
-                    GlideUtils.bindIMG(getBaseContext(), bannerBO.getImgurl(), imageView);
+                    MtGlideUtils.bindIMG(getBaseContext(), bannerBO.getImgurl(), imageView);
                     views.add(view);
                 }
                 mBannerAdapter.setViews(views);

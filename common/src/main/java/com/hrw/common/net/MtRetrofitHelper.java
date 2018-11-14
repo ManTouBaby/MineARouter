@@ -64,7 +64,6 @@ public class MtRetrofitHelper {
             okhttp3.MediaType mediaType = response.body().contentType();
             String content = response.body().string();
             MtLog.d("----------Request Start----------------");
-            MtLog.d("| " + request.toString());
             MtLog.d("| Response:" + content);
             MtLog.d("----------Request End:" + duration + "毫秒----------");
 //            System.out.println("Request Url:" + request.toString() + "\nResult:" + content);
