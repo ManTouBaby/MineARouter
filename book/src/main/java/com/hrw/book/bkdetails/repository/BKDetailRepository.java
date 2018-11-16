@@ -5,9 +5,9 @@ import android.arch.lifecycle.MutableLiveData;
 import com.hrw.book.entity.BKDetailBO;
 import com.hrw.book.service.IBKService;
 import com.hrw.common.baseMVVM.BaseRepository;
-import com.hrw.common.net.MtObserver;
 import com.hrw.common.net.MtResultBean1;
 import com.hrw.common.net.MtRetrofitHelper;
+import com.hrw.common.net.OnResultListener;
 
 /**
  * @version 1.0.0
@@ -27,7 +27,7 @@ public class BKDetailRepository extends BaseRepository {
     public MutableLiveData<BKDetailBO> getBookDetail(int bookId) {
         mIsOnLoadData.set(true);
         mIsOnRefresh.set(true);
-        subscribe(mIbkService.getBookDetail(bookId), new MtObserver<MtResultBean1<BKDetailBO>>() {
+        subscribe(mIbkService.getBookDetail(bookId), new OnResultListener<MtResultBean1<BKDetailBO>>() {
             @Override
             public void onLoadError(Throwable throwable) {
                 mIsOnLoadData.set(false);

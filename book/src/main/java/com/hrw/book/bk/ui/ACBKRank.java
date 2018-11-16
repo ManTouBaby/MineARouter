@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.hrw.book.R;
 import com.hrw.book.bk.viewmodel.BKHomeRankModel;
@@ -38,6 +39,7 @@ public class ACBKRank extends BaseActivity implements RadioGroup.OnCheckedChange
     RadioGroup mRgSex;
     RadioGroup mRgType;
     RadioGroup mRgTimeType;
+    TextView tvCurrentSelect;
 
     BKHomeRankModel mBkHomeRankModel;
 
@@ -54,6 +56,7 @@ public class ACBKRank extends BaseActivity implements RadioGroup.OnCheckedChange
     protected void initView() {
         mBkHomeRankModel = ViewModelProviders.of(this).get(BKHomeRankModel.class);
         initRecyclerView();
+        tvCurrentSelect = findViewById(R.id.tv_current_select);
         ((RadioButton) mRgSex.getChildAt(0)).setChecked(true);
         ((RadioButton) mRgType.getChildAt(0)).setChecked(true);
         ((RadioButton) mRgTimeType.getChildAt(0)).setChecked(true);
@@ -91,7 +94,7 @@ public class ACBKRank extends BaseActivity implements RadioGroup.OnCheckedChange
                 MtGlideUtils.bindIMG(getBaseContext(), ROOT_BOOK_IMG + bkListItemBO.getImg(), imageView);
             }
         };
-        View header = LayoutInflater.from(this).inflate(R.layout.header_book_rank_select, null);
+        final View header = LayoutInflater.from(this).inflate(R.layout.header_book_rank_select, null);
         mRgSex = header.findViewById(R.id.rg_book_reader_sex);
         mRgType = header.findViewById(R.id.rg_book_type);
         mRgTimeType = header.findViewById(R.id.rg_book_time_type);
@@ -107,20 +110,27 @@ public class ACBKRank extends BaseActivity implements RadioGroup.OnCheckedChange
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
+                float headerHeight = header.getMeasuredHeight() / getResources().getDisplayMetrics().density;
+                float offset = mRecyclerView.computeVerticalScrollOffset();
+                int lastIndex = layoutManager.findLastVisibleItemPosition();
+                int count = layoutManager.getItemCount();
+                if (offset <= headerHeight + 2 && lastIndex < count - 1) {
+                    float alpha = offset / headerHeight;
+                    tvCurrentSelect.setAlpha(alpha < 1 ? alpha : 1f);
+                } else if (offset > headerHeight) {
+                    tvCurrentSelect.setAlpha(1);
+                }
             }
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                int lastIndex = layoutManager.findLastVisibleItemPosition();
                 int firstIndex = layoutManager.findFirstVisibleItemPosition();
                 int count = layoutManager.getItemCount();
                 int visibleItemCount = recyclerView.getChildCount();
                 if (count - visibleItemCount <= firstIndex && mHasNext && SCROLL_STATE_DRAGGING == newState) {
                     page++;
                     mBkHomeRankModel.getBookList(sex, type, timeType, page);
-                    System.out.println("firstIndex:" + firstIndex + "  lastIndex:" + lastIndex + "  visibleItemCount:" + visibleItemCount + "   count:" + count);
                 }
             }
         });
@@ -182,6 +192,49 @@ public class ACBKRank extends BaseActivity implements RadioGroup.OnCheckedChange
         }
         page = 1;
         mBkHomeRankModel.getBookList(sex, type, timeType, page);
+        StringBuffer buffer = new StringBuffer();
+        switch (sex) {
+            case IBKType.SEX_LADY:
+                buffer.append("女生");
+                break;
+            case IBKType.SEX_MAN:
+                buffer.append("男生");
+                break;
+        }
+        buffer.append(" · ");
+        switch (type) {
+            case IBKType.TYPE_HOT:
+                buffer.append("最热");
+                break;
+            case IBKType.TYPE_COMMEND:
+                buffer.append("推荐");
+                break;
+            case IBKType.TYPE_OVER:
+                buffer.append("完结");
+                break;
+            case IBKType.TYPE_COLLECT:
+                buffer.append("收藏");
+                break;
+            case IBKType.TYPE_NEW:
+                buffer.append("新书");
+                break;
+            case IBKType.TYPE_VOTE:
+                buffer.append("评分");
+                break;
+        }
+        buffer.append(" · ");
+        switch (timeType) {
+            case IBKType.TIME_TYPE_WEEK:
+                buffer.append("周榜");
+                break;
+            case IBKType.TIME_TYPE_MONTH:
+                buffer.append("月榜");
+                break;
+            case IBKType.TIME_TYPE_TOTAL:
+                buffer.append("总榜");
+                break;
+        }
+        tvCurrentSelect.setText(buffer.toString());
     }
 
 

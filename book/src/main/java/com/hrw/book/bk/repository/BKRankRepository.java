@@ -6,9 +6,9 @@ import com.hrw.book.entity.BookList;
 import com.hrw.book.service.IBKService;
 import com.hrw.book.service.IBKType;
 import com.hrw.common.baseMVVM.BaseRepository;
-import com.hrw.common.net.MtObserver;
 import com.hrw.common.net.MtResultBean1;
 import com.hrw.common.net.MtRetrofitHelper;
+import com.hrw.common.net.OnResultListener;
 
 /**
  * @version 1.0.0
@@ -30,7 +30,7 @@ public class BKRankRepository extends BaseRepository {
 
         mIsOnLoadData.set(true);
         mIsOnRefresh.set(true);
-        subscribe(mIbkService.getBookList(sex, type, time, page), new MtObserver<MtResultBean1<BookList>>() {
+        subscribe(mIbkService.getBookList(sex, type, time, page), new OnResultListener<MtResultBean1<BookList>>() {
             @Override
             public void onLoadError(Throwable throwable) {
                 mIsOnLoadData.set(false);

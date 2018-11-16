@@ -9,6 +9,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @version 1.0.0
@@ -20,6 +22,7 @@ public class MtStatusBarHelper {
     private static Window window;
     private static Activity mActivity;
     private static MtStatusBarHelper mStatusHelper;
+    private static Map<Class<?>, View> mClassView = new HashMap<>();
 
     private MtStatusBarHelper() {
     }
@@ -50,17 +53,19 @@ public class MtStatusBarHelper {
                     //将主页面顶部延伸至status bar;虽默认为false,但经测试,DrawerLayout需显示设置
 //                    contentView.setClipToPadding(false);
                 }
-
-
-                View view = new View(mActivity);
-                view.setVisibility(View.VISIBLE);
-                //获取到状态栏的高度
-                int statusHeight = getStatusBarHeight();
-                //动态的设置隐藏布局的高度
-                ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, statusHeight);
-                view.setBackgroundColor(bgColor);
-                contentView.addView(view, params);
-
+                if (mClassView.containsKey(mActivity.getClass()) && mClassView.get(mActivity.getClass()) != null) {
+                    mClassView.get(mActivity.getClass()).setBackgroundColor(bgColor);
+                } else {
+                    View view = new View(mActivity);
+                    view.setVisibility(View.VISIBLE);
+                    mClassView.put(mActivity.getClass(), view);
+                    //获取到状态栏的高度
+                    int statusHeight = getStatusBarHeight();
+                    //动态的设置隐藏布局的高度
+                    ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, statusHeight);
+                    view.setBackgroundColor(bgColor);
+                    contentView.addView(view, params);
+                }
             }
         }
         return mStatusHelper;

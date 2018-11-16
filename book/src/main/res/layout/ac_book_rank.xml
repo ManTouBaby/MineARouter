@@ -46,10 +46,10 @@
         android:id="@+id/tv_current_select"
         android:layout_width="match_parent"
         android:layout_height="42dp"
+        android:alpha="0"
         android:background="@color/bg_main_white"
         android:gravity="center"
         android:text="男生 · 最热 · 月榜"
         android:textColor="@color/text_main_red"
-        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/mine_toolBar_container" />
 </android.support.constraint.ConstraintLayout>

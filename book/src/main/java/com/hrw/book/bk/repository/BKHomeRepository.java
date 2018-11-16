@@ -7,9 +7,9 @@ import com.hrw.book.entity.HomeChoiceBannerBO;
 import com.hrw.book.service.IBKService;
 import com.hrw.book.service.IBKType;
 import com.hrw.common.baseMVVM.BaseRepository;
-import com.hrw.common.net.MtObserver;
 import com.hrw.common.net.MtResultBean1;
 import com.hrw.common.net.MtRetrofitHelper;
+import com.hrw.common.net.OnResultListener;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class BKHomeRepository extends BaseRepository {
     }
 
     public MutableLiveData<List<HomeChoiceBannerBO>> getHomeChoiceBannerData(@IBKType.IBKReaderSex String sex) {
-        subscribe(mIbkHomePage.getHomeChoiceBannerData(sex), new MtObserver<MtResultBean1<List<HomeChoiceBannerBO>>>() {
+        subscribe(mIbkHomePage.getHomeChoiceBannerData(sex), new OnResultListener<MtResultBean1<List<HomeChoiceBannerBO>>>() {
             @Override
             public void onLoadError(Throwable throwable) {
             }
@@ -50,7 +50,7 @@ public class BKHomeRepository extends BaseRepository {
     public MutableLiveData<List<HomeChoiceBO>> getHomeChoiceData(@IBKType.IBKReaderSex String sex) {
         mIsOnLoadData.set(true);
         mIsOnRefresh.set(true);
-        subscribe(mIbkHomePage.getHomeChoiceData(sex), new MtObserver<MtResultBean1<List<HomeChoiceBO>>>() {
+        subscribe(mIbkHomePage.getHomeChoiceData(sex), new OnResultListener<MtResultBean1<List<HomeChoiceBO>>>() {
             @Override
             public void onLoadError(Throwable throwable) {
                 mIsOnLoadData.set(false);

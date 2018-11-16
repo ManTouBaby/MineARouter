@@ -10,9 +10,9 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hrw.book.R;
@@ -32,7 +32,8 @@ import com.hrw.smartrecyclerviewlibrary.SmartVH;
  * @desc:
  */
 public class ACBKDetails extends BaseActivity implements NestedScrollView.OnScrollChangeListener, View.OnClickListener {
-    NestedScrollView mScrollView;
+    RecyclerView mRvAuthorOtherBooks;
+
     ImageView mIvBookBG;
     ImageView mIvTopBG;
     ImageView mIvBack;
@@ -45,12 +46,12 @@ public class ACBKDetails extends BaseActivity implements NestedScrollView.OnScro
     TextView mTvBookDesc;
     TextView mTvBookUPTime;
     TextView mTvBookUPContent;
+    TextView mAuthorSameBooksTitle;
+    ConstraintLayout mClHeader;
+    ConstraintLayout mClToolBar;
 
-    RecyclerView mRvAuthorOtherBooks;
-
-    LinearLayout mllAuthorOtherBooks;
-    ConstraintLayout mClOtherSameBooks;
-
+    View mVOtherSameBooks;
+    View mVHeader;
 
     BKDetailsViewModel mDetailsViewModel;
     SmartAdapter<BKDetailBO.SameUserBooksBean> mSmartAdapter;
@@ -58,33 +59,38 @@ public class ACBKDetails extends BaseActivity implements NestedScrollView.OnScro
 
     @Override
     protected void initView() {
+        MtStatusBarHelper.instance(this).setBGColor(Color.TRANSPARENT).setFullScreen(true);
+        mDetailsViewModel = ViewModelProviders.of(this).get(BKDetailsViewModel.class);
         Bundle bundle = getIntent().getExtras();
         bookId = bundle.getInt("bookId");
 
-        mScrollView = findViewById(R.id.mine_main_container);
-        mScrollView.scrollTo(0, 0);
-        mIvBookBG = findViewById(R.id.iv_book_bg);
-        mIvTopBG = findViewById(R.id.iv_top_bg);
-        mIvBack = findViewById(R.id.iv_back);
-        mTvBookName = findViewById(R.id.tv_book_name);
-        mTvBookAuthor = findViewById(R.id.tv_book_author);
-        mTvBookType = findViewById(R.id.tv_book_type);
-        mTvBookStatus = findViewById(R.id.tv_book_status);
-        mTvBookScore = findViewById(R.id.tv_book_score);
-        mTvBookDesc = findViewById(R.id.tv_book_desc);
-        mTvBookUPTime = findViewById(R.id.tv_book_update_time);
-        mTvBookUPContent = findViewById(R.id.tv_book_update_content);
-        mllAuthorOtherBooks = findViewById(R.id.ll_author_other_books);
-        mClOtherSameBooks = findViewById(R.id.cl_other_same_book);
         initRecyclerView();
-        MtStatusBarHelper.instance(this).setBGColor(Color.TRANSPARENT).setFullScreen(true);
-        mDetailsViewModel = ViewModelProviders.of(this).get(BKDetailsViewModel.class);
+
+        mIvBack = findViewById(R.id.iv_back);
+        mClToolBar = findViewById(R.id.cl_toolBar_container);
+        mIvBookBG = mVHeader.findViewById(R.id.iv_book_bg);
+        mIvTopBG = mVHeader.findViewById(R.id.iv_top_bg);
+        mTvBookName = mVHeader.findViewById(R.id.tv_book_name);
+        mTvBookAuthor = mVHeader.findViewById(R.id.tv_book_author);
+        mTvBookType = mVHeader.findViewById(R.id.tv_book_type);
+        mTvBookStatus = mVHeader.findViewById(R.id.tv_book_status);
+        mTvBookScore = mVHeader.findViewById(R.id.tv_book_score);
+        mTvBookDesc = mVHeader.findViewById(R.id.tv_book_desc);
+        mTvBookUPTime = mVHeader.findViewById(R.id.tv_book_update_time);
+        mTvBookUPContent = mVHeader.findViewById(R.id.tv_book_update_content);
+        mAuthorSameBooksTitle = mVHeader.findViewById(R.id.tv_author_same_books);
+        mClHeader = mVHeader.findViewById(R.id.mine_cl_title_container);
+
+
     }
 
     private void initRecyclerView() {
         mRvAuthorOtherBooks = findViewById(R.id.rv_author_other_books);
+        mVOtherSameBooks = LayoutInflater.from(this).inflate(R.layout.bottom_book_details, null);
+        mVHeader = LayoutInflater.from(this).inflate(R.layout.header_book_details, null);
         mRvAuthorOtherBooks.setHasFixedSize(true);
-        mRvAuthorOtherBooks.setLayoutManager(new LinearLayoutManager(this));
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        mRvAuthorOtherBooks.setLayoutManager(layoutManager);
         mSmartAdapter = new SmartAdapter<BKDetailBO.SameUserBooksBean>(R.layout.item_book_show) {
             @Override
             protected void bindView(SmartVH smartVH, BKDetailBO.SameUserBooksBean sameUserBooksBean, int i) {
@@ -95,12 +101,33 @@ public class ACBKDetails extends BaseActivity implements NestedScrollView.OnScro
                 smartVH.getText(R.id.tv_book_score).setText(sameUserBooksBean.getScore() + "分");
             }
         };
+        mSmartAdapter.setHeaderView(mVHeader);
+        mSmartAdapter.setFooterView(mVOtherSameBooks);
         mRvAuthorOtherBooks.setAdapter(mSmartAdapter);
+        mRvAuthorOtherBooks.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                int count = layoutManager.getItemCount();
+                float offset = mRvAuthorOtherBooks.computeVerticalScrollOffset();
+                float mClHeaderHeight = mClHeader.getHeight() / getResources().getDisplayMetrics().density;
+                int lastVisiblePosition = layoutManager.findLastVisibleItemPosition();
+                if (offset <= mClHeaderHeight + 4 && lastVisiblePosition < count - 1) {
+                    float mm = offset / mClHeaderHeight;
+                    int alpha = mm < 1 ? (int) (255 * mm) : 255;
+                    mClToolBar.setBackgroundColor(Color.argb(alpha, 85, 68, 85));
+//                    System.out.println("mClHeaderHeight:" + mClHeaderHeight + "  offset:" + offset + "  mm:" + mm + "  lastVisiblePosition:" + lastVisiblePosition);
+                } else if (offset >= mClHeaderHeight) {
+                    mClToolBar.setBackgroundColor(Color.argb(255, 85, 68, 85));
+                }
+
+            }
+
+        });
+
     }
 
     @Override
     protected void initListener() {
-        mScrollView.setOnScrollChangeListener(this);
         mIvBack.setOnClickListener(this);
 
         mDetailsViewModel.getBookDetails(bookId).observe(this, new Observer<BKDetailBO>() {
@@ -117,8 +144,11 @@ public class ACBKDetails extends BaseActivity implements NestedScrollView.OnScro
                 mTvBookUPTime.setText(bkDetailBO.getLastTime());
                 mTvBookUPContent.setText(bkDetailBO.getLastChapter());
                 if (bkDetailBO.getSameUserBooks() != null && bkDetailBO.getSameUserBooks().size() > 0) {
-                    mllAuthorOtherBooks.setVisibility(View.VISIBLE);
+                    mAuthorSameBooksTitle.setVisibility(View.VISIBLE);
                     mSmartAdapter.setDate(bkDetailBO.getSameUserBooks());
+                }
+                if (bkDetailBO.getSameCategoryBooks() != null && bkDetailBO.getSameCategoryBooks().size() > 0) {
+                    mVOtherSameBooks.setVisibility(View.VISIBLE);
                 }
             }
         });
