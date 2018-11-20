@@ -18,7 +18,7 @@ public class BookList {
 
     private int Page;
     private boolean HasNext;
-    private List<BKListItemBO> BookList;
+    private List<BooKBO> BookList;
 
     public int getPage() {
         return Page;
@@ -36,11 +36,11 @@ public class BookList {
         this.HasNext = HasNext;
     }
 
-    public List<BKListItemBO> getBookList() {
+    public List<BooKBO> getBookList() {
         return BookList;
     }
 
-    public void setBookList(List<BKListItemBO> BookList) {
+    public void setBookList(List<BooKBO> BookList) {
         this.BookList = BookList;
     }
 

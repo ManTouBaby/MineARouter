@@ -2,6 +2,7 @@ package com.hrw.book.service;
 
 
 import com.hrw.book.entity.BKDetailBO;
+import com.hrw.book.entity.BKReadLabelBO;
 import com.hrw.book.entity.BookList;
 import com.hrw.book.entity.HomeChoiceBO;
 import com.hrw.book.entity.HomeChoiceBannerBO;
@@ -48,9 +49,19 @@ public interface IBKService {
      * @return
      */
     @GET("top/{sex}/top/{type}/{time}/{page}.html")
-    Observable<MtResultBean1<BookList>> getBookList(@Path("sex") @IBKType.IBKReaderSex String sex, @Path("type") @IBKType.IBKListType String type,
-                                                    @Path("time") @IBKType.IBKListByTime String time, @Path("page") int page);
+    Observable<MtResultBean1<BookList>> getTopBookList(@Path("sex") @IBKType.IBKReaderSex String sex, @Path("type") @IBKType.IBKListType String type,
+                                                       @Path("time") @IBKType.IBKListByTime String time, @Path("page") int page);
 
+    /**
+     * 获取书单
+     *
+     * @param sex
+     * @param type
+     * @param page
+     * @return
+     */
+    @GET("shudan/{sex}/all/{type}/{page}.html")
+    Observable<MtResultBean1> getBookList(@Path("sex") @IBKType.IBKReaderSex String sex, @Path("type") @IBKType.IBKListType String type, @Path("page") int page);
 
     /**
      * 获取图书详细信息
@@ -60,4 +71,12 @@ public interface IBKService {
      */
     @GET("info/{bookId}.html")
     Observable<MtResultBean1<BKDetailBO>> getBookDetail(@Path("bookId") int bookId);
+
+    /**
+     * 获取阅读内容
+     *
+     * @return
+     */
+    @GET("book/{bookId}/{bookPage}.html")
+    Observable<MtResultBean1<BKReadLabelBO>> getReadLableBO(@Path("bookId") int bookId, @Path("bookPage") int bookPage);
 }

@@ -4,37 +4,32 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.Observable;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.hrw.book.R;
-import com.hrw.book.adapter.BKHomeBannerAdapter;
 import com.hrw.book.adapter.BKHomeListAdapter;
-import com.hrw.book.adapter.BKHomePageTrans;
 import com.hrw.book.bk.viewmodel.BKHomePageModel;
 import com.hrw.book.entity.HomeChoiceBO;
 import com.hrw.book.entity.HomeChoiceBannerBO;
 import com.hrw.common.baseMVVM.BaseActivity;
 import com.hrw.common.utils.MtGlideUtils;
+import com.hrw.common.widget.MtViewPage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
     SwipeRefreshLayout mSRLayout;
-    //    @BindView(R.id.rl_book_home_item_show)
     RecyclerView mRecyclerView;
-    ViewPager mViewPager;
+    MtViewPage mViewPager;
 
     BKHomeListAdapter mBkhOmeListAdapter;
-    BKHomeBannerAdapter mBannerAdapter;
     BKHomePageModel mBkHomePageModel;
 
     @Override
@@ -43,7 +38,6 @@ public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefre
         initViewPage();
         mSRLayout = findViewById(R.id.swl_book_home_container);
         mSRLayout.setOnRefreshListener(this);
-
     }
 
     @Override
@@ -66,7 +60,7 @@ public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefre
                     MtGlideUtils.bindIMG(getBaseContext(), bannerBO.getImgurl(), imageView);
                     views.add(view);
                 }
-                mBannerAdapter.setViews(views);
+                mViewPager.setDate(views);
             }
         });
         mBkHomePageModel.getIsOnRefresh().addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
@@ -83,10 +77,8 @@ public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefre
     private void initViewPage() {
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        mViewPager.setPageMargin((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25, metrics));
-        mBannerAdapter = new BKHomeBannerAdapter();
-        mViewPager.setAdapter(mBannerAdapter);
-        mViewPager.setPageTransformer(true, new BKHomePageTrans());
+//        mViewPager.setPageMargin((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 25, metrics));
+//        mViewPager.setPageTransformer(true, new BKHomePageTrans());
     }
 
     private void initRecyclerView() {
@@ -114,16 +106,20 @@ public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefre
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.ll_book_home_rank:
+            case R.id.ll_book_home_rank://榜单
                 gotoActivity(ACBKRank.class);
                 break;
-            case R.id.ll_book_home_list:
+            case R.id.ll_book_home_list://书单
+
                 break;
-            case R.id.ll_book_home_type:
+            case R.id.ll_book_home_type://分类
+
                 break;
-            case R.id.ll_book_home_good:
+            case R.id.ll_book_home_good://推荐
+
                 break;
-            case R.id.ll_book_home_complete:
+            case R.id.ll_book_home_complete://完结
+
                 break;
         }
     }

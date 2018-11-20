@@ -30,7 +30,7 @@ public class BKRankRepository extends BaseRepository {
 
         mIsOnLoadData.set(true);
         mIsOnRefresh.set(true);
-        subscribe(mIbkService.getBookList(sex, type, time, page), new OnResultListener<MtResultBean1<BookList>>() {
+        subscribe(mIbkService.getTopBookList(sex, type, time, page), new OnResultListener<MtResultBean1<BookList>>() {
             @Override
             public void onLoadError(Throwable throwable) {
                 mIsOnLoadData.set(false);

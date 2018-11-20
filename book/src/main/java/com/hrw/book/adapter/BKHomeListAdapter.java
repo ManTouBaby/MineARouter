@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.hrw.book.R;
-import com.hrw.book.entity.BKListItemBO;
+import com.hrw.book.entity.BooKBO;
 import com.hrw.book.entity.HomeChoiceBO;
 import com.hrw.common.utils.MtGlideUtils;
 import com.hrw.smartrecyclerviewlibrary.SmartAdapter;
@@ -111,7 +111,7 @@ public class BKHomeListAdapter extends SmartAdapter<HomeChoiceBO> {
         }
     }
 
-    private View getViewShow1(View view, BKListItemBO listItemBO) {
+    private View getViewShow1(View view, BooKBO listItemBO) {
         ImageView ivBookBG = view.findViewById(R.id.iv_book_bg);
         TextView tvBookName = view.findViewById(R.id.tv_book_name);
         TextView tvBookDesc = view.findViewById(R.id.tv_book_desc);
@@ -125,7 +125,7 @@ public class BKHomeListAdapter extends SmartAdapter<HomeChoiceBO> {
         return view;
     }
 
-    private View getViewShow3(View view, BKListItemBO listItemBO) {
+    private View getViewShow3(View view, BooKBO listItemBO) {
         ImageView ivBookBG = view.findViewById(R.id.iv_book_bg);
         TextView tvBookName = view.findViewById(R.id.tv_book_name);
         TextView tvBookAuthor = view.findViewById(R.id.tv_book_author);

@@ -18,7 +18,7 @@ public class HomeChoiceBO extends BaseSmartBO {
      */
 
     private String Category;
-    private List<BKListItemBO> Books;
+    private List<BooKBO> Books;
     private List<BKCategoriesBO> Categories;
     private BKPushLisBO BookList;
 
@@ -31,11 +31,11 @@ public class HomeChoiceBO extends BaseSmartBO {
         this.Category = Category;
     }
 
-    public List<BKListItemBO> getBooks() {
+    public List<BooKBO> getBooks() {
         return Books;
     }
 
-    public void setBooks(List<BKListItemBO> Books) {
+    public void setBooks(List<BooKBO> Books) {
         this.Books = Books;
     }
 

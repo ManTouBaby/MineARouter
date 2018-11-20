@@ -5,7 +5,7 @@ package com.hrw.book.entity;
  * @date:2018/11/07 22:54
  * @desc:
  */
-public class BKListItemBO {
+public class BooKBO {
     /**
      * Id : 339970
      * Name : 妖孽动物园

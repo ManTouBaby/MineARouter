@@ -1,5 +1,8 @@
 package com.hrw.book.bkread.repository;
 
+import android.arch.lifecycle.MutableLiveData;
+
+import com.hrw.book.entity.BKReadLabelBO;
 import com.hrw.common.baseMVVM.BaseRepository;
 
 /**
@@ -9,4 +12,7 @@ import com.hrw.common.baseMVVM.BaseRepository;
  * @desc:
  */
 public class BKReadRepository extends BaseRepository {
+    MutableLiveData<BKReadLabelBO> mBKReadLableBO = new MutableLiveData<>();
+
+
 }

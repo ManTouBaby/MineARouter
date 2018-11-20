@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.hrw.book.R;
 import com.hrw.book.bk.viewmodel.BKHomeRankModel;
 import com.hrw.book.bkdetails.ui.ACBKDetails;
-import com.hrw.book.entity.BKListItemBO;
+import com.hrw.book.entity.BooKBO;
 import com.hrw.book.entity.BookList;
 import com.hrw.book.service.IBKType;
 import com.hrw.common.baseMVVM.BaseActivity;
@@ -34,7 +34,7 @@ import static com.hrw.common.servicePath.BKInterface.ROOT_BOOK_IMG;
  * @date:2018/11/13 11:22
  * @desc:
  */
-public class ACBKRank extends BaseActivity implements RadioGroup.OnCheckedChangeListener, OnSmartItemClickListener<BKListItemBO> {
+public class ACBKRank extends BaseActivity implements RadioGroup.OnCheckedChangeListener, OnSmartItemClickListener<BooKBO> {
     RecyclerView mRecyclerView;
     RadioGroup mRgSex;
     RadioGroup mRgType;
@@ -43,7 +43,7 @@ public class ACBKRank extends BaseActivity implements RadioGroup.OnCheckedChange
 
     BKHomeRankModel mBkHomeRankModel;
 
-    SmartAdapter<BKListItemBO> mSmartAdapter;
+    SmartAdapter<BooKBO> mSmartAdapter;
     private boolean mHasNext;
 
 
@@ -82,9 +82,9 @@ public class ACBKRank extends BaseActivity implements RadioGroup.OnCheckedChange
     }
 
     private void initRecyclerView() {
-        mSmartAdapter = new SmartAdapter<BKListItemBO>(R.layout.item_book_show2) {
+        mSmartAdapter = new SmartAdapter<BooKBO>(R.layout.item_book_show2) {
             @Override
-            protected void bindView(SmartVH smartVH, BKListItemBO bkListItemBO, int i) {
+            protected void bindView(SmartVH smartVH, BooKBO bkListItemBO, int i) {
                 smartVH.getText(R.id.tv_book_name).setText(bkListItemBO.getName());
                 smartVH.getText(R.id.tv_book_type).setText(bkListItemBO.getCName());
                 smartVH.getText(R.id.tv_book_author).setText(bkListItemBO.getAuthor());
@@ -239,7 +239,7 @@ public class ACBKRank extends BaseActivity implements RadioGroup.OnCheckedChange
 
 
     @Override
-    public void onSmartItemClick(BKListItemBO bkListItemBO, int i) {
+    public void onSmartItemClick(BooKBO bkListItemBO, int i) {
         Bundle bundle = new Bundle();
         bundle.putInt("bookId", bkListItemBO.getId());
         gotoActivity(ACBKDetails.class, bundle);

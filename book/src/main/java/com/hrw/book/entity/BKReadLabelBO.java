@@ -6,5 +6,5 @@ package com.hrw.book.entity;
  * @date:2018/11/08 14:29
  * @desc:
  */
-public class BKReadLableBO {
+public class BKReadLabelBO {
 }
