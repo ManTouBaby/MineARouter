@@ -27,6 +27,7 @@ import java.util.List;
 public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
     SwipeRefreshLayout mSRLayout;
     RecyclerView mRecyclerView;
+    MtViewPage mBanner;
     MtViewPage mViewPager;
 
     BKHomeListAdapter mBkhOmeListAdapter;
@@ -60,7 +61,7 @@ public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefre
                     MtGlideUtils.bindIMG(getBaseContext(), bannerBO.getImgurl(), imageView);
                     views.add(view);
                 }
-                mViewPager.setDate(views);
+                mBanner.setDate(views);
             }
         });
         mBkHomePageModel.getIsOnRefresh().addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
@@ -88,7 +89,7 @@ public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefre
         headerBanner.findViewById(R.id.ll_book_home_type).setOnClickListener(this);
         headerBanner.findViewById(R.id.ll_book_home_good).setOnClickListener(this);
         headerBanner.findViewById(R.id.ll_book_home_complete).setOnClickListener(this);
-        mViewPager = headerBanner.findViewById(R.id.vp_banner);
+        mBanner = headerBanner.findViewById(R.id.vp_banner);
         mRecyclerView = findViewById(R.id.rl_book_home_item_show);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);

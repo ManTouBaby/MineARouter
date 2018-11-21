@@ -2,6 +2,8 @@ package com.hrw.common.widget;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
@@ -38,9 +40,20 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
     int mTagWidth = 20;
     int mTagHeight = 20;
     float dpi;
-    long mCyclePeriod = 1000 * 1;
+    long mCyclePeriod = 1000 * 5;
     int mCurrentPage = -1;
+    ImageView oldSelect;
+    ImageView nowSelect;
 
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            mCurrentPage++;
+            mCurrentPage = mCurrentPage % mViews.size();
+            setCurrentPage(mCurrentPage);
+        }
+    };
 
     public MtViewPage(@NonNull Context context) {
         this(context, null);
@@ -72,6 +85,13 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
 
     }
 
+    public void setShowTagPoint(boolean showTagPoint) {
+        isShowTagPoint = showTagPoint;
+    }
+
+    public void setOpenAutoCycle(boolean openAutoCycle) {
+        isOpenAutoCycle = openAutoCycle;
+    }
 
     public void setDate(List<View> views) {
         mViews = views;
@@ -80,6 +100,10 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
             createImagePoint();
         }
         mtViewPageAdapter.notifyDataSetChanged();
+    }
+
+    private void setCurrentPage(int position) {
+        mViewPager.setCurrentItem(position);
     }
 
     private ImageView createImagePoint() {
@@ -94,19 +118,20 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
     }
 
     private void setSelectTagPoint(int position) {
-        ImageView selectImageView = null;
-        for (int i = 0; i < mllPointContainer.getChildCount(); i++) {
-            ImageView imageView = (ImageView) mllPointContainer.getChildAt(i);
-            imageView.setImageDrawable(mDefaultDrawableRes);
-            if (i == position) selectImageView = imageView;
+        if (oldSelect == null && nowSelect == null) {
+            oldSelect = (ImageView) mllPointContainer.getChildAt(position);
+        } else {
+            oldSelect = nowSelect;
         }
-        selectImageView.setImageDrawable(mSelectDrawableRes);
+        nowSelect = (ImageView) mllPointContainer.getChildAt(position);
+        oldSelect.setImageDrawable(mDefaultDrawableRes);
+        nowSelect.setImageDrawable(mSelectDrawableRes);
     }
 
     @Override
     protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
         super.onVisibilityChanged(changedView, visibility);
-        System.out.println("onVisibilityChanged:" + visibility);
+//        System.out.println("onVisibilityChanged:" + visibility);
         if (visibility == View.VISIBLE) {
             isClose = true;
             if (isOpenAutoCycle) {
@@ -127,7 +152,9 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
                 while (isClose) {
                     try {
                         Thread.sleep(mCyclePeriod);
-                        System.out.println("当前时间:");
+                        Message message = new Message();
+                        message.arg1 = 1;
+                        handler.sendMessage(message);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
