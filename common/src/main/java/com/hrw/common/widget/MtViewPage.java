@@ -3,7 +3,6 @@ package com.hrw.common.widget;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
@@ -30,31 +29,28 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
     List<View> mViews = new ArrayList<>();
     MtViewPageAdapter mtViewPageAdapter;
     LinearLayout mllPointContainer;
-    ViewPager mViewPager;
     Context mContext;
 
+    ViewPager mViewPager;
     Drawable mDefaultDrawableRes;
     Drawable mSelectDrawableRes;
-    boolean isShowTagPoint = true;
-    boolean isOpenAutoCycle = true;
-    boolean isClose = true;
-    int mTagWidth = 20;
-    int mTagHeight = 20;
-    float dpi;
-    long mCyclePeriod = 1000 * 5;
-    int mCurrentPage = -1;
+    boolean isShowTagPoint = true;//是否显示小圈圈
+    boolean isOpenAutoCycle = true;//是否进行自动无限滑动
+    boolean isOpenCycle = true;//是否可以无限滑动
+    int mTagWidth = 16;//标志点宽度
+    int mTagHeight = 16;//标志点高度
+    int mTagMarginLeft = 4;//标志点左边间距
+    int mTagMarginRight = 4;//标志点右边间距
+    long mCyclePeriod = 1000 * 5;//自动滚动周期
+    int mCurrentPage = -1;//当前显示界面
+
+    private boolean isClose = true;
     ImageView oldSelect;
     ImageView nowSelect;
+    float dpi;//相对密度
 
 
-    Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            mCurrentPage++;
-            mCurrentPage = mCurrentPage % mViews.size();
-            setCurrentPage(mCurrentPage);
-        }
-    };
+    Handler handler = new Handler();
 
     public MtViewPage(@NonNull Context context) {
         this(context, null);
@@ -62,7 +58,7 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
 
     public MtViewPage(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        dpi = context.getResources().getDisplayMetrics().densityDpi;
+        dpi = context.getResources().getDisplayMetrics().density;
         mContext = context;
         mDefaultDrawableRes = context.getResources().getDrawable(R.drawable.icon_tag_point_default);
         mSelectDrawableRes = context.getResources().getDrawable(R.drawable.icon_tag_point_select);
@@ -79,9 +75,13 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
             params.addRule(RelativeLayout.CENTER_HORIZONTAL);
             params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-            params.setMargins(16, 8, 16, 8);
+            params.setMargins((int) (16 * dpi), (int) (8 * dpi), (int) (16 * dpi), (int) (8 * dpi));
             mllPointContainer.setLayoutParams(params);
             addView(mllPointContainer);
+        }
+
+        if (isOpenAutoCycle) {
+            openAuto();
         }
 
     }
@@ -100,6 +100,8 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
         if (isShowTagPoint) for (int i = 0; i < views.size(); i++) {
             createImagePoint();
         }
+        setSelectTagPoint(getRealIndex(0));
+        mCurrentPage = getRealIndex(0);
         mtViewPageAdapter.notifyDataSetChanged();
     }
 
@@ -110,8 +112,8 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
     private ImageView createImagePoint() {
         ImageView imageView = new ImageView(mContext);
         imageView.setImageDrawable(mDefaultDrawableRes);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(mTagWidth, mTagHeight);
-        params.setMargins(8, 0, 8, 0);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int) (mTagWidth * dpi), (int) (mTagHeight * dpi));
+        params.setMargins((int) (mTagMarginLeft * dpi), 0, (int) (mTagMarginRight * dpi), 0);
         imageView.setLayoutParams(params);
 
         mllPointContainer.addView(imageView);
@@ -130,49 +132,21 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
     }
 
     @Override
-    protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
-        super.onVisibilityChanged(changedView, visibility);
-//        System.out.println("onVisibilityChanged:" + visibility);
-        if (visibility == View.VISIBLE) {
-            isClose = true;
-            if (isOpenAutoCycle) {
-                openAuto();
-            }
-        }
-        if (visibility == INVISIBLE) {
-            isClose = false;
-        }
-
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        System.out.println("绑定到界面");
+        isClose = true;
     }
 
-
-    private void openAuto() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (isClose) {
-                    try {
-                        Thread.sleep(mCyclePeriod);
-                        Message message = new Message();
-                        message.arg1 = 1;
-                        handler.sendMessage(message);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        System.out.println("解除绑定");
+        isClose = false;
     }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        setSelectTagPoint(getRealIndex(position));
-        mCurrentPage = getRealIndex(position);
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-
     }
 
     @Override
@@ -180,15 +154,24 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
 
     }
 
+    @Override
+    public void onPageSelected(int position) {
+        mCurrentPage = position;
+        setSelectTagPoint(getRealIndex(position));
+    }
 
     private class MtViewPageAdapter extends PagerAdapter {
 
         @Override
         public int getCount() {
-            if (mViews.size() < 1) {
-                return 0;
+            if (isOpenCycle) {
+                if (mViews.size() < 1) {
+                    return 0;
+                } else {
+                    return Integer.MAX_VALUE;
+                }
             } else {
-                return Integer.MAX_VALUE;
+                return mViews.size();
             }
         }
 
@@ -200,18 +183,6 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
         @NonNull
         @Override
         public Object instantiateItem(@NonNull ViewGroup container, int position) {
-//            if (mViews.size() > 0) {
-//                View view = mViews.get(getRealIndex(position));
-//                ViewParent parent = view.getParent();
-//                if (parent != null) {
-//                    ViewGroup group = (ViewGroup) parent;
-//                    group.removeView(view);
-//                }
-//                container.addView(view);
-//                return view;
-//            } else {
-//                return null;
-//            }
             View view = mViews.get(getRealIndex(position));
             ViewParent parent = view.getParent();
             if (parent != null) {
@@ -224,7 +195,7 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
 
         @Override
         public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-            container.removeView(mViews.get(position));
+            if (!isOpenCycle) container.removeView(mViews.get(position));
         }
     }
 
@@ -236,4 +207,30 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
             return position;
         }
     }
+
+
+    private void openAuto() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (isClose) {
+                    try {
+                        Thread.sleep(mCyclePeriod);
+                        System.out.println("线程存活");
+                        handler.post(runnable);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+    }
+
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            mCurrentPage++;
+            setCurrentPage(mCurrentPage);
+        }
+    };
 }

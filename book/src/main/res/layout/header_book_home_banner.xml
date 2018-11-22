@@ -9,7 +9,6 @@
         android:id="@+id/vp_banner"
         android:layout_width="match_parent"
         android:layout_height="158dp"
-        android:background="#545"
         android:clipChildren="false"
         android:gravity="center" />
 

@@ -3,6 +3,7 @@ package com.hrw.book.bk.ui;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.Observable;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,8 @@ import android.widget.ImageView;
 import com.hrw.book.R;
 import com.hrw.book.adapter.BKHomeListAdapter;
 import com.hrw.book.bk.viewmodel.BKHomePageModel;
+import com.hrw.book.bkdetails.ui.ACBKDetails;
+import com.hrw.book.entity.BooKBO;
 import com.hrw.book.entity.HomeChoiceBO;
 import com.hrw.book.entity.HomeChoiceBannerBO;
 import com.hrw.common.baseMVVM.BaseActivity;
@@ -24,7 +27,7 @@ import com.hrw.common.widget.MtViewPage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener {
+public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, View.OnClickListener, BKHomeListAdapter.OnBookClickListener {
     SwipeRefreshLayout mSRLayout;
     RecyclerView mRecyclerView;
     MtViewPage mBanner;
@@ -94,6 +97,7 @@ public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefre
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);
         mBkhOmeListAdapter = new BKHomeListAdapter(this, R.layout.item_book_home_type5);
+        mBkhOmeListAdapter.setOnBookClickListener(this);
         mRecyclerView.setAdapter(mBkhOmeListAdapter);
         mBkhOmeListAdapter.setHeaderView(headerBanner);
         mBkhOmeListAdapter.setItemType(1, R.layout.item_book_home_type1);
@@ -137,4 +141,10 @@ public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefre
     }
 
 
+    @Override
+    public void onBookClick(BooKBO listItemBO) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("bookId", listItemBO.getId());
+        gotoActivity(ACBKDetails.class, bundle);
+    }
 }
