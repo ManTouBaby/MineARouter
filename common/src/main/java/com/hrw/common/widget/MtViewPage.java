@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -124,8 +125,8 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
             oldSelect = nowSelect;
         }
         nowSelect = (ImageView) mllPointContainer.getChildAt(position);
-        oldSelect.setImageDrawable(mDefaultDrawableRes);
-        nowSelect.setImageDrawable(mSelectDrawableRes);
+        if (oldSelect != null) oldSelect.setImageDrawable(mDefaultDrawableRes);
+        if (nowSelect != null) nowSelect.setImageDrawable(mSelectDrawableRes);
     }
 
     @Override
@@ -165,8 +166,8 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        setSelectTagPoint(position);
-        mCurrentPage = position;
+        setSelectTagPoint(getRealIndex(position));
+        mCurrentPage = getRealIndex(position);
     }
 
     @Override
@@ -184,7 +185,11 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
 
         @Override
         public int getCount() {
-            return mViews.size();
+            if (mViews.size() < 1) {
+                return 0;
+            } else {
+                return Integer.MAX_VALUE;
+            }
         }
 
         @Override
@@ -195,13 +200,40 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
         @NonNull
         @Override
         public Object instantiateItem(@NonNull ViewGroup container, int position) {
-            container.addView(mViews.get(position));
-            return mViews.get(position);
+//            if (mViews.size() > 0) {
+//                View view = mViews.get(getRealIndex(position));
+//                ViewParent parent = view.getParent();
+//                if (parent != null) {
+//                    ViewGroup group = (ViewGroup) parent;
+//                    group.removeView(view);
+//                }
+//                container.addView(view);
+//                return view;
+//            } else {
+//                return null;
+//            }
+            View view = mViews.get(getRealIndex(position));
+            ViewParent parent = view.getParent();
+            if (parent != null) {
+                ViewGroup group = (ViewGroup) parent;
+                group.removeView(view);
+            }
+            container.addView(view);
+            return view;
         }
 
         @Override
         public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
             container.removeView(mViews.get(position));
+        }
+    }
+
+
+    private int getRealIndex(int position) {
+        if (mViews.size() > 0) {
+            return position % mViews.size();
+        } else {
+            return position;
         }
     }
 }
