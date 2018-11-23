@@ -35,7 +35,6 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
     Drawable mDefaultDrawableRes;
     Drawable mSelectDrawableRes;
     boolean isShowTagPoint = true;//是否显示小圈圈
-    boolean isOpenAutoCycle = true;//是否进行自动无限滑动
     boolean isOpenCycle = true;//是否可以无限滑动
     int mTagWidth = 16;//标志点宽度
     int mTagHeight = 16;//标志点高度
@@ -58,40 +57,43 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
 
     public MtViewPage(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        dpi = context.getResources().getDisplayMetrics().density;
         mContext = context;
+        dpi = context.getResources().getDisplayMetrics().density;
         mDefaultDrawableRes = context.getResources().getDrawable(R.drawable.icon_tag_point_default);
         mSelectDrawableRes = context.getResources().getDrawable(R.drawable.icon_tag_point_select);
 
+        //初始化ViewPager
         mViewPager = new ViewPager(context);
         mViewPager.setLayoutParams(new ViewPager.LayoutParams());
         mtViewPageAdapter = new MtViewPageAdapter();
         mViewPager.setAdapter(mtViewPageAdapter);
         mViewPager.addOnPageChangeListener(this);
-
         addView(mViewPager);
-        if (isShowTagPoint) {
-            mllPointContainer = new LinearLayout(context);
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-            params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-            params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-            params.setMargins((int) (16 * dpi), (int) (8 * dpi), (int) (16 * dpi), (int) (8 * dpi));
-            mllPointContainer.setLayoutParams(params);
-            addView(mllPointContainer);
-        }
+        openAuto();
 
-        if (isOpenAutoCycle) {
-            openAuto();
-        }
-
+        //初始化PointTag
+        mllPointContainer = new LinearLayout(mContext);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        params.setMargins((int) (16 * dpi), (int) (8 * dpi), (int) (16 * dpi), (int) (8 * dpi));
+        mllPointContainer.setLayoutParams(params);
+        addView(mllPointContainer);
     }
 
-    public void setShowTagPoint(boolean showTagPoint) {
+    public MtViewPage setShowTagPoint(boolean showTagPoint) {
         isShowTagPoint = showTagPoint;
+        return this;
     }
 
-    public void setOpenAutoCycle(boolean openAutoCycle) {
-        isOpenAutoCycle = openAutoCycle;
+    public MtViewPage setOpenAutoCycle(boolean openAutoCycle) {
+        isClose = openAutoCycle;
+        return this;
+    }
+
+    public MtViewPage setOpenCycle(boolean openCycle) {
+        isOpenCycle = openCycle;
+        return this;
     }
 
     public void setDate(List<View> views) {
@@ -100,13 +102,16 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
         if (isShowTagPoint) for (int i = 0; i < views.size(); i++) {
             createImagePoint();
         }
+
         setSelectTagPoint(getRealIndex(0));
         mCurrentPage = getRealIndex(0);
         mtViewPageAdapter.notifyDataSetChanged();
     }
 
-    private void setCurrentPage(int position) {
+    public MtViewPage setCurrentPage(int position) {
+        mCurrentPage = position;
         mViewPager.setCurrentItem(position);
+        return this;
     }
 
     private ImageView createImagePoint() {
@@ -121,6 +126,7 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
     }
 
     private void setSelectTagPoint(int position) {
+        if (!isShowTagPoint) return;
         if (oldSelect == null && nowSelect == null) {
             oldSelect = (ImageView) mllPointContainer.getChildAt(position);
         } else {

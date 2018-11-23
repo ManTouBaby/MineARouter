@@ -109,9 +109,6 @@ public class BKHomeListAdapter extends SmartAdapter<HomeChoiceBO> {
                 getViewShow3(horizontalContainer6, homeChoiceBO.getBooks().get(6));
                 break;
             case 12:
-                tvShowItemType = smartVH.getText(R.id.tv_item_type_name);
-                tvShowItemType.setText(homeChoiceBO.getCategory());
-                MtViewPage viewPage = smartVH.getViewById(R.id.vp_book_banner);
                 List<View> views = new ArrayList<>();
                 List<BooKBO> booKBOS = homeChoiceBO.getBooks();
                 for (int k = 0; k < booKBOS.size() / 3; k++) {
@@ -121,7 +118,13 @@ public class BKHomeListAdapter extends SmartAdapter<HomeChoiceBO> {
                     View view = getViewShow4(booKBOS.get(3 * k + 0), booKBOS.get(3 * k + 1), booKBOS.get(3 * k + 2));
                     views.add(view);
                 }
+                tvShowItemType = smartVH.getText(R.id.tv_item_type_name);
+                tvShowItemType.setText(homeChoiceBO.getCategory());
+                MtViewPage viewPage = smartVH.getViewById(R.id.vp_book_banner);
+                viewPage.setOpenAutoCycle(false);
+                viewPage.setOpenCycle(false);
                 viewPage.setDate(views);
+
                 break;
         }
     }
