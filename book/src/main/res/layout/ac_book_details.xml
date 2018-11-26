@@ -41,31 +41,39 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
-        <ImageView
-            android:id="@+id/iv_my_book_collect"
+        <TextView
+            android:id="@+id/tv_my_book_collect"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
+            android:drawablePadding="2dp"
+            android:drawableTop="@drawable/icon_collect_select"
+            android:gravity="center_horizontal"
             android:padding="6dp"
-            android:src="@mipmap/ic_book_no_collect"
+            android:text="收藏"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/iv_book_collect"
+            app:layout_constraintRight_toLeftOf="@+id/tv_book_collect_home"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/iv_book_collect"
+        <TextView
+            android:id="@+id/tv_book_collect_home"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
-            android:padding="10dp"
-            android:src="@mipmap/ic_my_collect"
+            android:drawablePadding="2dp"
+            android:drawableTop="@mipmap/ic_book_home"
+            android:gravity="center_horizontal"
+            android:padding="6dp"
+            android:text="书架"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintLeft_toRightOf="@+id/iv_my_book_collect"
+            app:layout_constraintLeft_toRightOf="@+id/tv_my_book_collect"
             app:layout_constraintRight_toLeftOf="@+id/tv_read_book"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -79,7 +87,7 @@
             android:textColor="@color/text_white"
             android:textSize="18sp"
             app:layout_constraintHorizontal_weight="4"
-            app:layout_constraintLeft_toRightOf="@+id/iv_book_collect"
+            app:layout_constraintLeft_toRightOf="@+id/tv_book_collect_home"
             app:layout_constraintRight_toRightOf="parent" />
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

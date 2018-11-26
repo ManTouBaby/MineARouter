@@ -31,7 +31,6 @@ public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefre
     SwipeRefreshLayout mSRLayout;
     RecyclerView mRecyclerView;
     MtViewPage mBanner;
-    MtViewPage mViewPager;
 
     BKHomeListAdapter mBkhOmeListAdapter;
     BKHomePageModel mBkHomePageModel;
@@ -93,6 +92,7 @@ public class ACBKHome extends BaseActivity implements SwipeRefreshLayout.OnRefre
         headerBanner.findViewById(R.id.ll_book_home_good).setOnClickListener(this);
         headerBanner.findViewById(R.id.ll_book_home_complete).setOnClickListener(this);
         mBanner = headerBanner.findViewById(R.id.vp_banner);
+        mBanner.setOpenAutoCycle(true);
         mRecyclerView = findViewById(R.id.rl_book_home_item_show);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);

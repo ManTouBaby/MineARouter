@@ -36,14 +36,15 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
     Drawable mSelectDrawableRes;
     boolean isShowTagPoint = true;//是否显示小圈圈
     boolean isOpenCycle = true;//是否可以无限滑动
-    int mTagWidth = 16;//标志点宽度
-    int mTagHeight = 16;//标志点高度
+    int mTagWidth = 8;//标志点宽度
+    int mTagHeight = 8;//标志点高度
     int mTagMarginLeft = 4;//标志点左边间距
     int mTagMarginRight = 4;//标志点右边间距
     long mCyclePeriod = 1000 * 5;//自动滚动周期
     int mCurrentPage = -1;//当前显示界面
 
     private boolean isClose = true;
+    private boolean mOpenAutoCycle = false;
     ImageView oldSelect;
     ImageView nowSelect;
     float dpi;//相对密度
@@ -69,7 +70,6 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
         mViewPager.setAdapter(mtViewPageAdapter);
         mViewPager.addOnPageChangeListener(this);
         addView(mViewPager);
-        openAuto();
 
         //初始化PointTag
         mllPointContainer = new LinearLayout(mContext);
@@ -87,7 +87,10 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
     }
 
     public MtViewPage setOpenAutoCycle(boolean openAutoCycle) {
-        isClose = openAutoCycle;
+        mOpenAutoCycle = openAutoCycle;
+        if (mOpenAutoCycle) {
+            openAuto();
+        }
         return this;
     }
 
@@ -141,14 +144,19 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         System.out.println("绑定到界面");
-        isClose = true;
+//        isClose = true;
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         System.out.println("解除绑定");
-        isClose = false;
+//        isClose = false;
+    }
+
+    @Override
+    public void onDescendantInvalidated(@NonNull View child, @NonNull View target) {
+        super.onDescendantInvalidated(child, target);
     }
 
     @Override
@@ -222,7 +230,7 @@ public class MtViewPage extends RelativeLayout implements ViewPager.OnPageChange
                 while (isClose) {
                     try {
                         Thread.sleep(mCyclePeriod);
-                        System.out.println("线程存活");
+//                        System.out.println("线程存活");
                         handler.post(runnable);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
