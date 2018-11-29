@@ -2,7 +2,7 @@ package com.hrw.book.service;
 
 
 import com.hrw.book.entity.BKDetailBO;
-import com.hrw.book.entity.BKReadLabelBO;
+import com.hrw.book.entity.BKChapterContentBO;
 import com.hrw.book.entity.BookList;
 import com.hrw.book.entity.HomeChoiceBO;
 import com.hrw.book.entity.HomeChoiceBannerBO;
@@ -78,5 +78,5 @@ public interface IBKService {
      * @return
      */
     @GET("book/{bookId}/{bookPage}.html")
-    Observable<MtResultBean1<BKReadLabelBO>> getReadLableBO(@Path("bookId") int bookId, @Path("bookPage") int bookPage);
+    Observable<MtResultBean1<BKChapterContentBO>> getReadLableBO(@Path("bookId") int bookId, @Path("bookPage") int bookPage);
 }

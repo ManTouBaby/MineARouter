@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.hrw.book.R;
 import com.hrw.book.bkdetails.viewmodel.BKDetailsViewModel;
+import com.hrw.book.bkread.ui.ACBKRead;
 import com.hrw.book.entity.BKDetailBO;
 import com.hrw.common.baseMVVM.BaseActivity;
 import com.hrw.common.servicePath.BKInterface;
@@ -70,6 +71,7 @@ public class ACBKDetails extends BaseActivity implements NestedScrollView.OnScro
     BKDetailsViewModel mDetailsViewModel;
     SmartAdapter<BKDetailBO.SameUserBooksBean> mSmartAdapter;
     List<BKDetailBO.SameCategoryBooksBean> mCategoryBooksBeans;
+    BKDetailBO mBkDetailBO;
     int bookId;
 
 
@@ -168,6 +170,7 @@ public class ACBKDetails extends BaseActivity implements NestedScrollView.OnScro
         mDetailsViewModel.getBookDetails(bookId).observe(this, new Observer<BKDetailBO>() {
             @Override
             public void onChanged(@Nullable BKDetailBO bkDetailBO) {
+                mBkDetailBO = bkDetailBO;
                 MtGlideUtils.bindIMG(getBaseContext(), BKInterface.ROOT_BOOK_IMG + bkDetailBO.getImg(), mIvBookBG);
                 MtGlideUtils.bindIMG(getBaseContext(), BKInterface.ROOT_BOOK_IMG + bkDetailBO.getImg(), mIvTopBG);
                 mTvBookName.setText(bkDetailBO.getName());
@@ -277,6 +280,10 @@ public class ACBKDetails extends BaseActivity implements NestedScrollView.OnScro
             case R.id.tv_book_collect_home:
                 break;
             case R.id.tv_read_book:
+                Bundle bundle = new Bundle();
+                bundle.putInt("bookId", mBkDetailBO.getId());
+                bundle.putInt("bookPage", mBkDetailBO.getFirstChapterId());
+                gotoActivity(ACBKRead.class, bundle);
                 break;
         }
     }

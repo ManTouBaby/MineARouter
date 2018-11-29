@@ -3,12 +3,12 @@ package com.hrw.book.entity;
 import java.util.List;
 
 /**
- * @author:MtBaby
- * @date:2018/11/19 20:11
+ * @version 1.0.0
+ * @author:hrw
+ * @date:2018/11/29 14:41
  * @desc:
  */
-public class BKReadListBO {
-
+public class BKChapterBO {
     /**
      * id : 343551
      * name : 盛唐幻夜

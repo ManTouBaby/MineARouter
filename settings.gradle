@@ -1,1 +1,1 @@
-include ':app', ':common', ':music', ':news', ':login', ':book'
+include ':app', ':common', ':music', ':news', ':login', ':book', ':read'

@@ -1,6 +1,9 @@
 package com.hrw.book.bkread.viewmodel;
 
+import android.arch.lifecycle.MutableLiveData;
+
 import com.hrw.book.bkread.repository.BKReadRepository;
+import com.hrw.book.entity.BKChapterContentBO;
 import com.hrw.common.baseMVVM.BaseViewModel;
 
 /**
@@ -13,5 +16,9 @@ public class BKReadViewModel extends BaseViewModel<BKReadRepository> {
     @Override
     protected BKReadRepository createRepository() {
         return new BKReadRepository();
+    }
+
+    public MutableLiveData<BKChapterContentBO> getReaderItem(int bookId, int bookPage) {
+        return mRepository.getReaderItem(bookId, bookPage);
     }
 }
