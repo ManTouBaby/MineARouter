@@ -1,7 +1,6 @@
 package com.hrw.book;
 
 import android.app.Application;
-import android.arch.persistence.room.Room;
 
 import com.hrw.common.net.MtRetrofitHelper;
 import com.hrw.common.servicePath.BKInterface;
@@ -19,6 +18,6 @@ public class BKApp extends Application {
         super.onCreate();
         MtRetrofitHelper.init(BKInterface.ROOT_BOOK);
         MtLog.init(true);
-        Room.databaseBuilder(getApplicationContext(), AppDataBase.class, "mineARouter");
+        AppDataBase.instance(this);
     }
 }

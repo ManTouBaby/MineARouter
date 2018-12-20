@@ -53,6 +53,32 @@ public class BaseRepository {
                 });
     }
 
+    protected <T> void subscribe1(Observable<T> observable, final OnResultListener<T> onResultListener) {
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<T>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(T t) {
+                        onResultListener.onLoadSuccess(t);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        onResultListener.onLoadError(e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
     public MutableLiveData<ErrorResult> getErrorResult() {
         return mErrorResult;
     }

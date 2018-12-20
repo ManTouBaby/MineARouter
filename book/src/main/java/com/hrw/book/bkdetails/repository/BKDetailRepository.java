@@ -1,6 +1,7 @@
 package com.hrw.book.bkdetails.repository;
 
 import android.arch.lifecycle.MutableLiveData;
+import android.databinding.ObservableBoolean;
 
 import com.hrw.book.entity.BKDetailBO;
 import com.hrw.book.service.IBKService;
@@ -8,6 +9,7 @@ import com.hrw.common.baseMVVM.BaseRepository;
 import com.hrw.common.net.MtResultBean1;
 import com.hrw.common.net.MtRetrofitHelper;
 import com.hrw.common.net.OnResultListener;
+import com.hrw.common.utils.collect.CollectBO;
 
 /**
  * @version 1.0.0
@@ -45,4 +47,6 @@ public class BKDetailRepository extends BaseRepository {
         });
         return mBookDetails;
     }
+
+
 }

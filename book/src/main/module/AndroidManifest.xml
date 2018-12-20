@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".bkdetails.ui.ACBKDetails" />
         <activity android:name=".bkread.ui.ACBKRead" />
+        <activity android:name=".collect.ACBKCollect" />
     </application>
 
 </manifest>

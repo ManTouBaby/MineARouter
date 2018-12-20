@@ -18,11 +18,16 @@ import android.widget.TextView;
 import com.hrw.book.R;
 import com.hrw.book.bkdetails.viewmodel.BKDetailsViewModel;
 import com.hrw.book.bkread.ui.ACBKRead;
+import com.hrw.book.collect.ACBKCollect;
 import com.hrw.book.entity.BKDetailBO;
 import com.hrw.common.baseMVVM.BaseActivity;
 import com.hrw.common.servicePath.BKInterface;
 import com.hrw.common.utils.MtGlideUtils;
 import com.hrw.common.utils.MtStatusBarHelper;
+import com.hrw.common.utils.collect.AppDataBase;
+import com.hrw.common.utils.collect.CollectBO;
+import com.hrw.common.utils.collect.CollectType;
+import com.hrw.common.utils.collect.CollectViewModel;
 import com.hrw.smartrecyclerviewlibrary.OnSmartItemClickListener;
 import com.hrw.smartrecyclerviewlibrary.SmartAdapter;
 import com.hrw.smartrecyclerviewlibrary.SmartVH;
@@ -36,7 +41,7 @@ import java.util.Map;
  * @version 1.0.0
  * @author:hrw
  * @date:2018/11/14 16:10
- * @desc:
+ * @desc:小说详细页面
  */
 public class ACBKDetails extends BaseActivity implements NestedScrollView.OnScrollChangeListener, View.OnClickListener, OnSmartItemClickListener<BKDetailBO.SameUserBooksBean> {
     RecyclerView mRvAuthorOtherBooks;
@@ -69,10 +74,12 @@ public class ACBKDetails extends BaseActivity implements NestedScrollView.OnScro
 
     View mVHeader;
     BKDetailsViewModel mDetailsViewModel;
+    CollectViewModel mCollectViewModel;
     SmartAdapter<BKDetailBO.SameUserBooksBean> mSmartAdapter;
     List<BKDetailBO.SameCategoryBooksBean> mCategoryBooksBeans;
     BKDetailBO mBkDetailBO;
     int bookId;
+    boolean isCollect;
 
 
     Map<View, Map<Integer, View>> sameBKView = new HashMap();
@@ -81,6 +88,7 @@ public class ACBKDetails extends BaseActivity implements NestedScrollView.OnScro
     protected void initView() {
         MtStatusBarHelper.instance(this).setBGColor(Color.TRANSPARENT).setFullScreen(true);
         mDetailsViewModel = ViewModelProviders.of(this).get(BKDetailsViewModel.class);
+        mCollectViewModel = ViewModelProviders.of(this).get(CollectViewModel.class);
         Bundle bundle = getIntent().getExtras();
         bookId = bundle.getInt("bookId");
 
@@ -197,6 +205,19 @@ public class ACBKDetails extends BaseActivity implements NestedScrollView.OnScro
             }
         });
 
+        mCollectViewModel.getCollectById(AppDataBase.instance(this), bookId).observe(this, new Observer<CollectBO>() {
+            @Override
+            public void onChanged(@Nullable CollectBO collectBO) {
+                if (collectBO == null) {
+                    mTvCollect.setSelected(false);
+                    isCollect = false;
+                } else {
+                    mTvCollect.setSelected(true);
+                    isCollect = true;
+                }
+            }
+        });
+
         mDetailsViewModel.getIsOnLoadData().addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
@@ -276,8 +297,27 @@ public class ACBKDetails extends BaseActivity implements NestedScrollView.OnScro
                 getRandomDate();
                 break;
             case R.id.tv_my_book_collect:
+                CollectBO collectBO = new CollectBO();
+                collectBO.setCollectId(mBkDetailBO.getId());
+                collectBO.setCollectAuthor(mBkDetailBO.getAuthor());
+                collectBO.setCollectFirstChapterId(mBkDetailBO.getFirstChapterId() + "");
+                collectBO.setCollectLastChapter(mBkDetailBO.getLastChapter());
+                collectBO.setCollectLastChapterId(mBkDetailBO.getLastChapterId() + "");
+                collectBO.setCollectImg(mBkDetailBO.getImg());
+                collectBO.setCollectInfo(mBkDetailBO.getDesc());
+                collectBO.setCollectLastTime(mBkDetailBO.getLastTime());
+                collectBO.setCollectName(mBkDetailBO.getName());
+                collectBO.setCollectScore(mBkDetailBO.getBookVote().getScore());
+                collectBO.setCollectType(CollectType.BOOK);
+                if (isCollect) {
+                    mCollectViewModel.deleteCollect(AppDataBase.instance(this), collectBO);
+                } else {
+                    mCollectViewModel.insertCollect(AppDataBase.instance(this), collectBO);
+                }
+//                mTvCollect.setSelected(true);
                 break;
             case R.id.tv_book_collect_home:
+                gotoActivity(ACBKCollect.class);
                 break;
             case R.id.tv_read_book:
                 Bundle bundle = new Bundle();

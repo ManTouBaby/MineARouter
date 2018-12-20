@@ -27,4 +27,6 @@ public class BKDetailsViewModel extends BaseViewModel<BKDetailRepository> {
         mBookDetails = mRepository.getBookDetail(bookId);
         return mBookDetails;
     }
+
+
 }

@@ -10,7 +10,7 @@ import android.arch.persistence.room.PrimaryKey;
  * @date:2018/11/26 15:58
  * @desc:
  */
-@Entity(tableName = Constance.COLLECT_HOME)
+@Entity(tableName = "collectHome")
 public class CollectBO {
     @PrimaryKey
     int CollectId;
@@ -19,11 +19,20 @@ public class CollectBO {
     String CollectName;
     String CollectAuthor;
     String CollectImg;
+    String CollectScore;
 
     String CollectLastTime;
     String CollectFirstChapterId;
     String CollectLastChapter;
     String CollectLastChapterId;
+
+    public String getCollectScore() {
+        return CollectScore;
+    }
+
+    public void setCollectScore(String collectScore) {
+        CollectScore = collectScore;
+    }
 
     public int getCollectId() {
         return CollectId;
@@ -37,7 +46,7 @@ public class CollectBO {
         return CollectType;
     }
 
-    public void setCollectType(int collectType) {
+    public void setCollectType(@CollectType int collectType) {
         CollectType = collectType;
     }
 

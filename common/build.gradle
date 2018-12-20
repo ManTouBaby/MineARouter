@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-
 android {
     compileSdkVersion 26
 
@@ -54,5 +53,6 @@ dependencies {
     //    api rootProject.ext.dependencies.arouter_compiler
     api rootProject.ext.dependencies.lifecycle_extensions
     api rootProject.ext.dependencies.room_runtime
+    annotationProcessor rootProject.ext.dependencies.room_compiler
     api rootProject.ext.dependencies.room_rxjava2
 }

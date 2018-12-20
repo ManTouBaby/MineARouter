@@ -6,5 +6,6 @@
         <activity android:name=".bk.ui.ACBKHome"></activity>
         <activity android:name=".bk.ui.ACBKRank" />
         <activity android:name=".bkdetails.ui.ACBKDetails" />
+        <activity android:name=".collect.ACBKCollect" />
     </application>
 </manifest>

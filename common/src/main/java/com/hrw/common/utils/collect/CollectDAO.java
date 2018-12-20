@@ -16,12 +16,18 @@ import java.util.List;
 @Dao
 public interface CollectDAO {
 
-    @Query("select * from " + Constance.COLLECT_HOME)
+    @Query("select * from collectHome")
     List<CollectBO> getAllCollect();
+
+    @Query("select * from collectHome where CollectType = :collectType")
+    List<CollectBO> getAllCollectByType(int collectType);
+
+    @Query("select * from collectHome where CollectId = :collectId")
+    CollectBO getCollect(String collectId);
 
     @Insert
     void insertAll(CollectBO... collectBOS);
 
-    @Delete
-    void removeCollect();
+    @Delete()
+    void deleteCollect(CollectBO... collectBOS);
 }
