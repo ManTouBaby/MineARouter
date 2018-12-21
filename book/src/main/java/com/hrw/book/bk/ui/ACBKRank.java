@@ -21,9 +21,9 @@ import com.hrw.book.entity.BookList;
 import com.hrw.book.service.IBKType;
 import com.hrw.common.baseMVVM.BaseActivity;
 import com.hrw.common.utils.MtGlideUtils;
-import com.hrw.smartrecyclerviewlibrary.OnSmartItemClickListener;
-import com.hrw.smartrecyclerviewlibrary.SmartAdapter;
-import com.hrw.smartrecyclerviewlibrary.SmartVH;
+import com.hrw.smartview.adapter.SmartAdapter;
+import com.hrw.smartview.adapter.SmartVH;
+import com.hrw.smartview.listener.OnSmartItemClickListener;
 
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING;
 import static com.hrw.common.servicePath.BKInterface.ROOT_BOOK_IMG;

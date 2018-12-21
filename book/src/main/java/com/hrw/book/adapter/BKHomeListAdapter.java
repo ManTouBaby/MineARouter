@@ -13,8 +13,8 @@ import com.hrw.book.entity.BooKBO;
 import com.hrw.book.entity.HomeChoiceBO;
 import com.hrw.common.utils.MtGlideUtils;
 import com.hrw.common.widget.MtViewPage;
-import com.hrw.smartrecyclerviewlibrary.SmartAdapter;
-import com.hrw.smartrecyclerviewlibrary.SmartVH;
+import com.hrw.smartview.adapter.SmartAdapter;
+import com.hrw.smartview.adapter.SmartVH;
 
 import java.util.ArrayList;
 import java.util.List;

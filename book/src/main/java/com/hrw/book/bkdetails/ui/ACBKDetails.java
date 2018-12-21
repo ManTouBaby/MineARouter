@@ -28,9 +28,9 @@ import com.hrw.common.utils.collect.AppDataBase;
 import com.hrw.common.utils.collect.CollectBO;
 import com.hrw.common.utils.collect.CollectType;
 import com.hrw.common.utils.collect.CollectViewModel;
-import com.hrw.smartrecyclerviewlibrary.OnSmartItemClickListener;
-import com.hrw.smartrecyclerviewlibrary.SmartAdapter;
-import com.hrw.smartrecyclerviewlibrary.SmartVH;
+import com.hrw.smartview.adapter.SmartAdapter;
+import com.hrw.smartview.adapter.SmartVH;
+import com.hrw.smartview.listener.OnSmartItemClickListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -121,7 +121,8 @@ public class ACBKDetails extends BaseActivity implements NestedScrollView.OnScro
         mRvAuthorOtherBooks.setHasFixedSize(true);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRvAuthorOtherBooks.setLayoutManager(layoutManager);
-        mSmartAdapter = new SmartAdapter<BKDetailBO.SameUserBooksBean>(R.layout.item_book_show) {
+
+        mRvAuthorOtherBooks.setAdapter(mSmartAdapter = new SmartAdapter<BKDetailBO.SameUserBooksBean>(R.layout.item_book_show) {
             @Override
             protected void bindView(SmartVH smartVH, BKDetailBO.SameUserBooksBean sameUserBooksBean, int i) {
                 MtGlideUtils.bindIMG(getBaseContext(), BKInterface.ROOT_BOOK_IMG + sameUserBooksBean.getImg(), smartVH.getImage(R.id.iv_book_bg));
@@ -130,12 +131,10 @@ public class ACBKDetails extends BaseActivity implements NestedScrollView.OnScro
                 smartVH.getText(R.id.tv_book_author).setText(sameUserBooksBean.getAuthor());
                 smartVH.getText(R.id.tv_book_score).setText(sameUserBooksBean.getScore() + "分");
             }
-        };
+        }.setHeaderView(mVHeader)
+                .setFooterView(mVOtherSameBooks)
+                .setOnSmartItemClickListener(this));
 
-        mSmartAdapter.setHeaderView(mVHeader);
-        mSmartAdapter.setFooterView(mVOtherSameBooks);
-        mSmartAdapter.setOnSmartItemClickListener(this);
-        mRvAuthorOtherBooks.setAdapter(mSmartAdapter);
         mRvAuthorOtherBooks.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {

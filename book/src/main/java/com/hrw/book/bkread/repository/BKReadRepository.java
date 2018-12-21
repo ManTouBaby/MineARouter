@@ -2,6 +2,7 @@ package com.hrw.book.bkread.repository;
 
 import android.arch.lifecycle.MutableLiveData;
 
+import com.hrw.book.entity.BKChapterBO;
 import com.hrw.book.entity.BKChapterContentBO;
 import com.hrw.book.service.IBKService;
 import com.hrw.common.baseMVVM.BaseRepository;
@@ -19,23 +20,25 @@ import com.hrw.common.net.OnResultListener;
 public class BKReadRepository extends BaseRepository {
     private final IBKService mIbkHomePage;
     MutableLiveData<BKChapterContentBO> mBKReadLabelBO = new MutableLiveData<>();
+    MutableLiveData<BKChapterBO> mChapterItems = new MutableLiveData<>();
 
 
     public BKReadRepository() {
         mIbkHomePage = MtRetrofitHelper.getRetrofit().createClass(IBKService.class);
     }
 
-    public MutableLiveData<BKChapterContentBO> getReaderItem(int bookId, int bookPage) {
+    public MutableLiveData<BKChapterContentBO> getReaderContent(int bookId, int bookPage) {
         mIsOnLoadData.set(true);
-        subscribe(mIbkHomePage.getReadLableBO(bookId, bookPage), new OnResultListener<MtResultBean1<BKChapterContentBO>>() {
+        subscribe(mIbkHomePage.getReadContent(bookId, bookPage), new OnResultListener<MtResultBean1<BKChapterContentBO>>() {
             @Override
             public void onLoadError(Throwable throwable) {
-                mIsOnLoadData.set(true);
+                mIsOnLoadData.set(false);
                 mErrorResult.setValue(new ErrorResult(-1, throwable.getMessage()));
             }
 
             @Override
             public void onLoadSuccess(MtResultBean1<BKChapterContentBO> o) {
+                mIsOnLoadData.set(false);
                 if (o.getStatus() == 1) {
                     mBKReadLabelBO.setValue(o.getData());
                 } else {
@@ -44,5 +47,27 @@ public class BKReadRepository extends BaseRepository {
             }
         });
         return mBKReadLabelBO;
+    }
+
+    public MutableLiveData<BKChapterBO> getChapterItem(int bookId) {
+        mIsOnLoadData.set(true);
+        subscribe(mIbkHomePage.getChapterItem(bookId), new OnResultListener<MtResultBean1<BKChapterBO>>() {
+            @Override
+            public void onLoadError(Throwable throwable) {
+                mIsOnLoadData.set(false);
+                mErrorResult.setValue(new ErrorResult(-1, throwable.getMessage()));
+            }
+
+            @Override
+            public void onLoadSuccess(MtResultBean1<BKChapterBO> o) {
+                mIsOnLoadData.set(false);
+                if (o.getStatus() == 1) {
+                    mChapterItems.setValue(o.getData());
+                } else {
+                    mErrorResult.setValue(new ErrorResult(o.getStatus(), o.getInfo()));
+                }
+            }
+        });
+        return mChapterItems;
     }
 }

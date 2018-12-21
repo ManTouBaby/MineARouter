@@ -12,7 +12,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * @version 1.0.0
@@ -61,12 +60,18 @@ public class MtRetrofitHelper {
             okhttp3.Response response = chain.proceed(chain.request());
             long endTime = System.currentTimeMillis();
             long duration = endTime - startTime;
-            okhttp3.MediaType mediaType = response.body().contentType();
             String content = response.body().string();
             MtLog.d("----------Request Start----------------");
-            MtLog.d("| Response:" + content);
+            MtLog.d("| " + request.url().toString());
+            MtLog.d("| " + content);
             MtLog.d("----------Request End:" + duration + "毫秒----------");
 //            System.out.println("Request Url:" + request.toString() + "\nResult:" + content);
+            okhttp3.MediaType mediaType = null;
+            try {
+                mediaType = response.body().contentType();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return response.newBuilder()
                     .body(okhttp3.ResponseBody.create(mediaType, content))
                     .build();
@@ -83,7 +88,7 @@ public class MtRetrofitHelper {
 
         if (mRetrofit == null) mRetrofit = new Retrofit.Builder()
                 .baseUrl(mBaseUrl)
-                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().create()))
+                .addConverterFactory(LenientGsonConverterFactory.create(new GsonBuilder().create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//支持RxJava
                 .client(mClient)
                 .build();

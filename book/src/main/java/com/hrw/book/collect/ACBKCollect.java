@@ -14,8 +14,8 @@ import com.hrw.common.utils.collect.AppDataBase;
 import com.hrw.common.utils.collect.CollectBO;
 import com.hrw.common.utils.collect.CollectType;
 import com.hrw.common.utils.collect.CollectViewModel;
-import com.hrw.smartrecyclerviewlibrary.SmartAdapter;
-import com.hrw.smartrecyclerviewlibrary.SmartVH;
+import com.hrw.smartview.adapter.SmartAdapter;
+import com.hrw.smartview.adapter.SmartVH;
 
 import java.util.List;
 

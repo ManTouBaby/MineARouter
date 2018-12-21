@@ -3,6 +3,7 @@ package com.hrw.book.bkread.viewmodel;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.hrw.book.bkread.repository.BKReadRepository;
+import com.hrw.book.entity.BKChapterBO;
 import com.hrw.book.entity.BKChapterContentBO;
 import com.hrw.common.baseMVVM.BaseViewModel;
 
@@ -18,7 +19,12 @@ public class BKReadViewModel extends BaseViewModel<BKReadRepository> {
         return new BKReadRepository();
     }
 
-    public MutableLiveData<BKChapterContentBO> getReaderItem(int bookId, int bookPage) {
-        return mRepository.getReaderItem(bookId, bookPage);
+    public MutableLiveData<BKChapterContentBO> getReaderContent(int bookId, int bookPage) {
+        return mRepository.getReaderContent(bookId, bookPage);
     }
+
+    public MutableLiveData<BKChapterBO> getChapterItem(int bookId) {
+        return mRepository.getChapterItem(bookId);
+    }
+
 }

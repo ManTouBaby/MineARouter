@@ -1,6 +1,7 @@
 package com.hrw.book.entity;
 
-import com.hrw.smartrecyclerviewlibrary.BaseSmartBO;
+
+import com.hrw.smartview.adapter.BaseSmartBO;
 
 import java.util.List;
 
